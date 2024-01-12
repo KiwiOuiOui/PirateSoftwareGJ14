@@ -1,0 +1,39 @@
+{
+	"name": "Pirate Game Jam - KiwiOuiOui",
+	"version": "0.0.0",
+	"description": "KiwiOuiOui's Game for PirateSoftware's Game Jam (january 2024)",
+	"scripts": {
+		"test": "echo \"package.json ok\"",
+		"dev": "node_modules/.bin/webpack serve --open --config webpack_conf/webpack.dev.js",
+		"package": "node_modules/.bin/webpack --config webpack_conf/webpack.prod.js",
+		"start": "node_modules/.bin/http-server -p 31512 dist"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/KiwiOuiOui/PirateSoftwareGJ2024.git"
+	},
+	"keywords": [
+		"gamejam",
+		"webdev",
+		"js",
+		"gamedev"
+	],
+	"author": "Quentin BOULIC-MAILLARD",
+	"license": "GPL3.0",
+	"bugs": {
+		"url": "https://github.com/KiwiOuiOui/PirateSoftwareGJ2024/issues"
+	},
+	"homepage": "https://github.com/KiwiOuiOui/PirateSoftwareGJ2024#readme",
+	"devDependencies": {
+		"@babel/core": "^7.13.16",
+		"babel-loader": "^8.2.2",
+		"clean-webpack-plugin": "^4.0.0-alpha.0",
+		"css-loader": "^5.2.4",
+		"html-webpack-plugin": "^5.3.1",
+		"http-server": "^14.1.1",
+		"style-loader": "^2.0.0",
+		"webpack": "^5.35.1",
+		"webpack-cli": "^4.6.0",
+		"webpack-dev-server": "^3.11.2"
+	}
+}
