@@ -1,0 +1,19 @@
+html,
+body {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: red;
+	background: #181818;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+game {
+	background: #555555;
+}
