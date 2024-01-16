@@ -1,0 +1,48 @@
+import { ServiceLocator } from '../ServiceLocator.js';
+import { Button } from '../../components/ButtonComponent.js';
+import { RectangleCollider } from '../../components/RectangleCollider.js';
+import { CircleCollider } from '../../components/CircleCollider.js';
+import { PauseKeyComponent } from '../../components/PauseKeyComponent.js';
+import { ButtonHitBox } from '../../components/ButtonHitBox.js';
+import { PlayerControls } from '../../components/PlayerControls.js';
+import { PhysicsComponent } from '../../components/PhysicsComponent.js';
+import { ForceComponent } from '../../components/ForceComponent.js';
+
+export class ComponentFactory {
+    static initialize() {
+        this.registerComponent("PauseKey", PauseKeyComponent);
+        this.registerComponent("ButtonHitBox", ButtonHitBox);
+        this.registerComponent("RectangleCollider", RectangleCollider);
+        this.registerComponent("CircleCollider", CircleCollider);
+        this.registerComponent("Button", Button);
+        this.registerComponent("Physics", PhysicsComponent);
+        this.registerComponent("ForceComponent", ForceComponent);
+        this.registerComponent("PlayerControls", PlayerControls);
+    }
+
+    static registerComponent(type, componentClass) {
+        this._creators.set(type, (node) => { return new componentClass(node); });
+        console.log("Component registration \"" + type + "\"...");
+    }
+
+    static create(type, node) {
+        let component = null;
+
+        if (this._creators.has(type)) {
+            ServiceLocator.debug("Component Factory creating \"" + type + "\"...");
+            component = this._creators.get(type)(node);
+
+            ServiceLocator.componentManager.addComponent(component);
+            if (node) node.addComponent(component);
+
+            return component;
+        } else {
+            ServiceLocator.error("Component Factory cannot create \"" + type + "\"...");
+        }
+
+        return null;
+    }
+}
+
+ComponentFactory._creators = new Map();
+ComponentFactory.initialize();
