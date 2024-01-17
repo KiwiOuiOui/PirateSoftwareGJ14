@@ -11,15 +11,28 @@ export class FirstScene extends Scene {
     initialize() {
         ServiceLocator.graphicManager.changePalette('ice');
 
+        //FPS indicator
         //let debug = new Debug("debug");
         //this.root.addChild(debug);
 
         let h = ServiceLocator.context.canvas.height;
         let w = ServiceLocator.context.canvas.width;
 
-        let platform = new Platform("platform", new Vector(60, 40), new Vector(40, 40), -1) //9)
-        this.root.addChild(platform);
+        //border of the game
+        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
+        this.root.addChild(borderleft);
+        let borderright = new Platform("borderleft", new Vector(250, 0), new Vector(10, h), 100) //9)
+        this.root.addChild(borderright);
+        let borderup = new Platform("borderleft", new Vector(0, 0), new Vector(w, 10), 100) //9)
+        this.root.addChild(borderup);
+        let borderdown = new Platform("borderleft", new Vector(0, 170), new Vector(w, 10), 100) //9)
+        this.root.addChild(borderdown);
+        let borderrightATH = new Platform("borderleft", new Vector(310, 0), new Vector(10, h), 100) //9)
+        this.root.addChild(borderrightATH);
 
+
+        let platform = new Platform("platform", new Vector(80, 60), new Vector(10, 10), -1) //9)
+        this.root.addChild(platform);
 
         let player = new Player("Victor");
         player.position = new Vector(50, 140);
