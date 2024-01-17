@@ -9,28 +9,30 @@ export class Player extends Node {
     constructor(name) {
         super(name);
 
-        this._maxWalkingSpeed = 200;
 
         this._controls = ServiceLocator.componentManager.create("PlayerControls", this);
-        //this._velocity = ServiceLocator.componentManager.create("VelocityTransition", this);
+        this._velocity = ServiceLocator.componentManager.create("VelocityTransition", this);
+        this._maxWalkingSpeed = 100;
+        this._velocity.transitionSpeed = 10;
         this._graphic = ServiceLocator.graphicManager.create("animSprite", this, 2);
-        //this._collider = ServiceLocator.componentManager.create("RectangleCollider", this);
-        //ServiceLocator.componentManager.addCollider(this._collider);
-
         let sprite = new Image(320, 180);
         sprite.src = persoSprite;
-
         this._graphic.image = sprite
         this._graphic.frame = new Rectangle(new Vector(0,0),new Vector(24,24));
         this._graphic.position = new Vector(-12, -12);
         this._graphic.lastFrameNb = 1
+
+                //this._collider = ServiceLocator.componentManager.create("RectangleCollider", this);
+        //ServiceLocator.componentManager.addCollider(this._collider);
+
         //this._collider.hitbox = new Rectangle(new Vector(), new Vector(20, 20));
         //this._collider.cooldown = 50;
-
-        this._debug = false;
-        //this.defaultOnCollide = this._collider.onCollide;
+                //this.defaultOnCollide = this._collider.onCollide;
 
         //this._collider.onCollide = this.onCollide;
+
+
+        this._debug = false;
 
         this._controls.initialize();
 
@@ -78,10 +80,10 @@ export class Player extends Node {
             //this._velocity.desiredVelocity.x = this._maxWalkingSpeed * (right - left);
         }
         this._controls.update = () => {
-            this.position.x += this._maxWalkingSpeed*this._controls.direction.right*ServiceLocator.clockManager.dtime;
-            this.position.x -= this._maxWalkingSpeed*this._controls.direction.left*ServiceLocator.clockManager.dtime;
-            this.position.y += this._maxWalkingSpeed*this._controls.direction.down*ServiceLocator.clockManager.dtime;
-            this.position.y -= this._maxWalkingSpeed*this._controls.direction.up*ServiceLocator.clockManager.dtime;    
+            let v = new Vector(0,0);
+            v.x += this._maxWalkingSpeed*(this._controls.direction.right-this._controls.direction.left);
+            v.y += this._maxWalkingSpeed*(this._controls.direction.down-this._controls.direction.up);    
+            this._velocity.desiredVelocity = v; 
         }
     }
 

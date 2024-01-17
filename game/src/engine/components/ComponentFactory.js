@@ -7,6 +7,7 @@ import { ButtonHitBox } from '../../components/ButtonHitBox.js';
 import { PlayerControls } from '../../components/PlayerControls.js';
 import { PhysicsComponent } from '../../components/PhysicsComponent.js';
 import { ForceComponent } from '../../components/ForceComponent.js';
+import { VelocityTransition } from '../../components/VelocityTransitionComponent.js';
 
 export class ComponentFactory {
     static initialize() {
@@ -18,6 +19,7 @@ export class ComponentFactory {
         this.registerComponent("Physics", PhysicsComponent);
         this.registerComponent("ForceComponent", ForceComponent);
         this.registerComponent("PlayerControls", PlayerControls);
+        this.registerComponent("VelocityTransition", VelocityTransition);
     }
 
     static registerComponent(type, componentClass) {
