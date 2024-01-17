@@ -24,7 +24,6 @@ export class Ball extends Node {
         this._collider.hitbox = new Circle(new Vector(0,0), radius);
 
         this._defaultOnCollide = this._collider.onCollide;
-
         this._collider.onCollide = this.onCollide;
     }
 

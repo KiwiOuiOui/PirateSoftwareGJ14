@@ -1,4 +1,4 @@
-import { Collider } from '../engine/Collider.js';
+import { Collider } from './Collider.js';
 import { Vector } from '../engine/maths/Vector.js';
 
 export class ForceComponent extends Collider {

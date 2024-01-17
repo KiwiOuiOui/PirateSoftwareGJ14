@@ -15,12 +15,8 @@ export class Platform extends Node {
         this._graphic.stroke = "transparent";
         this._collider.hitbox = new Rectangle(position, dimension);
 
-        let defaultOnCollide = this._collider.onCollide;
-
-        this._collider.onCollide = (collider) => {
-            defaultOnCollide(collider);
-        };
-
+        this._defaultOnCollide = this._collider.onCollide;
+        this._collider.onCollide = this.onCollide;
     }
 
     move(vector) {
@@ -29,5 +25,9 @@ export class Platform extends Node {
 
     set color(value) {
         this._graphic.fill = value;
+    }
+
+    onCollide = (collider) => {
+        this._defaultOnCollide(collider);
     }
 }

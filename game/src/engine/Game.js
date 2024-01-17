@@ -48,8 +48,8 @@ export class Game {
 		ServiceLocator.eventManager.process();
 		
 		if (ServiceLocator.clockManager.running) {
-			ServiceLocator.componentManager.update();
 			this._scene.updateNodes();
+			ServiceLocator.componentManager.update();
 		}
 		
 		ServiceLocator.animationFrameCode = window.requestAnimationFrame((timestamp) => {

@@ -1,5 +1,5 @@
 import { ServiceLocator } from '../engine/ServiceLocator.js';
-import { Collider } from '../engine/Collider.js';
+import { Collider } from './Collider.js';
 import { Rectangle } from '../engine/maths/Rectangle.js';
 import { Vector } from '../engine/maths/Vector.js';
 

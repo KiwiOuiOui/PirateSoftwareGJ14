@@ -1,5 +1,5 @@
 import { ServiceLocator } from '../engine/ServiceLocator.js';
-import { Collider } from '../engine/Collider.js';
+import { Collider } from './/Collider.js';
 import { Circle } from '../engine/maths/Circle.js';
 import { Vector } from '../engine/maths/Vector.js';
 
@@ -20,9 +20,5 @@ export class CircleCollider extends Collider {
 
     move(vector) {
         this._hitbox = this._hitbox.move(vector);
-    }
-    
-    onCollide(collider) {
-        super.onCollide(collider)
     }
 }
