@@ -18,7 +18,7 @@ export class GraphicFactory {
 
     static registerGraphic(type, graphicClass) {
         this._creators.set(type, (node) => { return new graphicClass(node); });
-        console.log("Component registration \"" + type + "\"...");
+        console.log("GraphicFactory registration \"" + type + "\"...");
     }
 
 

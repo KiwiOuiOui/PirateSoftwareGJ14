@@ -81,7 +81,7 @@ export class ClockManager {
     }
     
     get dtime() {
-        return this._dtime / 1000;
+        return this._dtime / 1000; // return in sec
     }
 
     get time() {

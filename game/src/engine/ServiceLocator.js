@@ -82,7 +82,7 @@ class ServiceLocator {
 
     debug(...args) {
         if (this._debugMode >= 1) {
-            console.log(/*"frame #" + this._FPSCounter.frameNb, */...args);
+            console.debug(/*"frame #" + this._FPSCounter.frameNb, */...args);
         }
     }
     error(...args) {

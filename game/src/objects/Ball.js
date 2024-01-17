@@ -5,32 +5,21 @@ import { ForceComponent } from '../components/ForceComponent.js';
 import { Platform } from './Platform.js';
 import { Vector } from '../engine/maths/Vector.js';
 import { CircleCollider } from '../components/CircleCollider.js';
-import persoSprite from '/assets/spritePerso.png';
 import { Rectangle } from '../engine/maths/Rectangle.js';
 
 export class Ball extends Node {
     constructor(name, position, radius, layer = 0) {
         super(name);
-        this._graphic2 = ServiceLocator.graphicManager.create("circle", this, layer);
-
-        this._graphic = ServiceLocator.graphicManager.create("animSprite", this, layer);
+        this._graphic = ServiceLocator.graphicManager.create("circle", this, layer);
         this._physics = ServiceLocator.componentManager.create("Physics", this);
         this._collider = ServiceLocator.componentManager.create("CircleCollider", this);
 
         ServiceLocator.componentManager.addCollider(this._collider);
-        this._graphic2.circle = new Circle(new Vector(0,0), radius);
-        this._graphic2.fill = "yellow";
-        this._graphic2.stroke = "transparent";
+        this._graphic.circle = new Circle(new Vector(0,0), radius);
+        this._graphic.fill = "yellow";
+        this._graphic.stroke = "transparent";
 
         this.position = position;
-
-        let sprite = new Image(320, 180);
-        sprite.src = persoSprite;
-
-        this._graphic.image = sprite
-        this._graphic.frame = new Rectangle(new Vector(0,0),new Vector(24,24));
-        this._graphic.position = new Vector(-12, -12);
-        this._graphic.lastFrameNb = 2
 
         this._collider.hitbox = new Circle(new Vector(0,0), radius);
 
@@ -127,8 +116,5 @@ export class Ball extends Node {
             //ServiceLocator.debug("CORRECTION MAGNITUDE : ", (this._collider.hitbox.radius + collider.hitbox.radius) - dist.magnitude)
             let posCorrect = normal.multiply(Math.ceil((this._collider.hitbox.radius + collider.hitbox.radius) - dist.magnitude) / 2);
         }
-    }
-    onUpdate = () => {
-        this._graphic.checkNextFrameOrNotAndProceed()
     }
 }

@@ -27,11 +27,12 @@ export class PauseKeyComponent extends Component {
 
     onEvent(event) {
         if (event.type == "keyup") {
-            if (event.keyCode == 80)
+            if (event.keyCode == 80){
+                console.log("paused frame #" + ServiceLocator.FPSCounter.frameNb)
                 ServiceLocator.clockManager.pause();
+            }
             if (event.keyCode == 82)
                 ServiceLocator.clockManager.resume();
         }
-        console.log("paused frame #" + ServiceLocator.FPSCounter.frameNb)
     }
 }

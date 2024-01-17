@@ -22,7 +22,7 @@ export class ComponentFactory {
 
     static registerComponent(type, componentClass) {
         this._creators.set(type, (node) => { return new componentClass(node); });
-        console.log("Component registration \"" + type + "\"...");
+        console.log("ComponentFactory registration \"" + type + "\"...");
     }
 
     static create(type, node) {
