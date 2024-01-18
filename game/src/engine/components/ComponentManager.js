@@ -62,7 +62,7 @@ export class ComponentManager {
                     collider1.enabled &&
                     collider2.enabled) {
                     if (collider1.checkCollision(collider2)) {
-                        console.log(collider1, "collide", collider2)
+                        ServiceLocator.debug(collider1, "collide", collider2)
                         collider1.onCollide(collider2);
                         collider2.onCollide(collider1);
                         

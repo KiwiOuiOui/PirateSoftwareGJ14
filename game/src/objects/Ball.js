@@ -9,7 +9,7 @@ import { Rectangle } from '../engine/maths/Rectangle.js';
 
 export class Ball extends Node {
     constructor(name, position, radius, layer = 0) {
-        super(name);
+        super(name, position);
         this._graphic = ServiceLocator.graphicManager.create("circle", this, layer);
         this._physics = ServiceLocator.componentManager.create("Physics", this);
         this._collider = ServiceLocator.componentManager.create("CircleCollider", this);

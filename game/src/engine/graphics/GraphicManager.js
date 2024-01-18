@@ -19,18 +19,42 @@ export class GraphicManager {
 
     draw(context) {
         ServiceLocator.FPSCounter.update()
-        this._graphics.forEach((layer) => {
-            layer.forEach((graphic) => {
-                if (graphic.enabled &&
-                    graphic.node.enabled &&
-                    graphic.node.scene.drawable) {
-                    context.scale(ServiceLocator.scale, ServiceLocator.scale);
-                    context.translate(graphic.node.globalPosition.x, graphic.node.globalPosition.y);
-                    graphic.draw(context);
-                    context.resetTransform();
-                }
+        //drawing in Y order then by layer
+        for (let i = 0; i <= ServiceLocator.context.canvas.height/ServiceLocator.scale; i++) {
+            let renderQueue = [];
+            this._graphics.forEach((layer) => {
+                layer.forEach((graphic) => {
+                    if (graphic.enabled &&
+                        graphic.node.enabled &&
+                        graphic.node.scene.drawable) {
+                            if(graphic.node.globalPosition.y <= i &&
+                                graphic.node.globalPosition.y > i-1) {
+                                renderQueue.push(graphic)
+                            }
+                        }
+                });
             });
-        });
+
+            renderQueue.forEach((graphic) => {
+                context.scale(ServiceLocator.scale, ServiceLocator.scale);
+                context.translate(graphic.node.globalPosition.x, graphic.node.globalPosition.y);
+                graphic.draw(context);
+                context.resetTransform();
+            });
+        }
+        // drawing by layer
+        // this._graphics.forEach((layer) => {
+        //     layer.forEach((graphic) => {
+        //         if (graphic.enabled &&
+        //             graphic.node.enabled &&
+        //             graphic.node.scene.drawable) {
+        //             context.scale(ServiceLocator.scale, ServiceLocator.scale);
+        //             context.translate(graphic.node.globalPosition.x, graphic.node.globalPosition.y);
+        //             graphic.draw(context);
+        //             context.resetTransform();
+        //         }
+        //     });
+        // });
     }
 
     changePalette(name){

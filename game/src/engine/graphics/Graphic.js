@@ -44,7 +44,7 @@ export class Graphic {
         this._layer = value;
     }
 
-    get Layer() {
+    get layer() {
         return this._layer;
     }
 }

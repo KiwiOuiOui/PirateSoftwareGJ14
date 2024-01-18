@@ -7,8 +7,8 @@ import persoSprite from '/assets/spritePerso.png';
 import { ForceComponent } from '../components/ForceComponent';
 
 export class Player extends Node {
-    constructor(name) {
-        super(name);
+    constructor(name, position) {
+        super(name, position);
 
         this._graphic = ServiceLocator.graphicManager.create("animSprite", this, 2);
         let sprite = new Image(320, 180);

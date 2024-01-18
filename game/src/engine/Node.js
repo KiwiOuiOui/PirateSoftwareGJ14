@@ -2,11 +2,11 @@ import { ServiceLocator } from '../engine/ServiceLocator.js';
 import { Vector } from './maths/Vector.js';
 
 export class Node {
-    constructor(name) {
+    constructor(name, position = new Vector(0, 0)) {
         this._enabled = true;
 
         this._name = name;
-        this._position = new Vector(0, 0);
+        this._position = position;
 
         this._children = [];
         this._components = [];

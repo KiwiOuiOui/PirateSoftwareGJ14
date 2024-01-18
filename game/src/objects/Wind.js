@@ -5,7 +5,7 @@ import { Vector } from '../engine/maths/Vector.js';
 
 export class Wind extends Node {
     constructor(name, position, dimension, layer = 0) {
-        super(name);
+        super(name, position);
 
         this._graphic = ServiceLocator.graphicManager.create("rectangle", this, layer);
         this._force = ServiceLocator.componentManager.create("ForceComponent", this);
