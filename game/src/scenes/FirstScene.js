@@ -6,6 +6,7 @@ import { Wind } from '../objects/Wind.js';
 //import { Player } from '../objects/Player.js';
 import { Player } from '../objects/Player.js';
 import { ServiceLocator } from '../engine/ServiceLocator.js';
+import { Platform3D } from '../objects/Platform3D';
 
 export class FirstScene extends Scene {
     initialize() {
@@ -31,7 +32,7 @@ export class FirstScene extends Scene {
         this.root.addChild(borderrightATH);
 
 
-        let platform = new Platform("platform", new Vector(80, 60), new Vector(10, 10), -1) //9)
+        let platform = new Platform3D("platform", new Vector(80, 60), new Vector(10, 10), -1) //9)
         this.root.addChild(platform);
 
         let player = new Player("Victor");

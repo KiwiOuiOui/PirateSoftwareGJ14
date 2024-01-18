@@ -18,11 +18,7 @@ export class Platform extends Node {
         this._defaultOnCollide = this._collider.onCollide;
         this._collider.onCollide = this.onCollide;
     }
-
-    move(vector) {
-
-    }
-
+    
     set color(value) {
         this._graphic.fill = value;
     }
