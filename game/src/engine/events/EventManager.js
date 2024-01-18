@@ -50,7 +50,6 @@ export class EventManager {
 
     process() {
         this._events.forEach((event) => {
-            //console.log("process : ", event.type)
             switch (event.type) {
                 case "keydown":
                     this._notifyListKeyPressed.forEach((observer) => {

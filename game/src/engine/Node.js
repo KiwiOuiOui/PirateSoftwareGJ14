@@ -12,8 +12,8 @@ export class Node {
         this._components = [];
         this._graphics = [];
 
-        this._scene = null;
         this._parent = null;
+        this._scene = null;
     }
 
     get enabled() {
@@ -32,16 +32,18 @@ export class Node {
 
 
     get scene() {
-        return this._scene;
+        if(this._scene) {
+            return this._scene
+        }
+        return this.parent.scene;
     }
-
-    set scene(scene) {
-        this._scene = scene;
-    }
-
 
     get parent() {
         return this._parent;
+    }
+
+    set parent(p) {
+        this._parent = p;
     }
 
 
@@ -81,7 +83,6 @@ export class Node {
     addChild(child) {
         this._children.push(child);
         child._parent = this;
-        child.scene = this._scene;
     }
 
     removeChild(node) {

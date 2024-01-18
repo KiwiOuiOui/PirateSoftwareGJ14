@@ -9,12 +9,12 @@ export class Scene {
         this._active = true;
         this._initialized = false;
 
-        this._drawable = true;
-        this._updatable = true;
-        this._inputable = true;
+        this._drawable = false;
+        this._updatable = false;
+        this._inputable = false;
 
-        this._root = new Node("root");
-        this._root.scene = this;
+        this._root = new Node("root de "+ name);
+        this._root._scene = this;
 
         this._clock = ServiceLocator.clockManager.addClock();
 
@@ -43,6 +43,25 @@ export class Scene {
     // get destroyNodeList() {
     //     return this._destroyNodeList;
     // }
+    enable() {
+        console.log("Scene \""+this.name+"\" enabled...")
+        this.drawable = true;
+        this.updatable = true;
+        this.inputable = true;
+        this._enable = true;
+    }
+
+    disable() {
+        console.log("Scene \""+this.name+"\" disabled...")
+        this.drawable = false;
+        this.updatable = false;
+        this.inputable = false;
+        this._enable = false;
+    }
+
+    get enabled() {
+        return this._enable;
+    }
 
     get initialized() {
         return this._initialized;
@@ -78,12 +97,6 @@ export class Scene {
         this._inputable = inputable;
     }
 
-    disable() {
-        this._enable = true;
-    }
-    enable() {
-        this._enable = false;
-    }
 
     set view(view) {
         this._view = view;
@@ -109,7 +122,7 @@ export class Scene {
     }
 
     updateNodes() {
-        if (this._root.enabled)
+        if (this.enabled && this._root.enabled)
             this._root.update();
     }
 

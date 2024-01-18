@@ -28,6 +28,7 @@ export class VelocityTransition extends Velocity {
     }
 
     update() {
+
         let delta = this.node.scene.clock.multiplier * ServiceLocator.clockManager.dtime;
         this.velocity = this.velocity.multiply(1 - delta * this._transitionSpeed).add(this._desiredVelocity.multiply(delta * this._transitionSpeed));
 

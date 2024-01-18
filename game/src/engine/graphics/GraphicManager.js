@@ -13,6 +13,8 @@ export class GraphicManager {
 
 
     create(type, node, layer) {
+        console.log("GraphicFactory create \"" + type + "\"...", node);
+
         return GraphicFactory.create(type, node, layer);
     }
 
@@ -24,9 +26,10 @@ export class GraphicManager {
             let renderQueue = [];
             this._graphics.forEach((layer) => {
                 layer.forEach((graphic) => {
-                    if (graphic.enabled &&
+                    if (graphic.node.scene &&
+                        graphic.node.scene.drawable &&
                         graphic.node.enabled &&
-                        graphic.node.scene.drawable) {
+                        graphic.enabled) {
                             if(graphic.node.globalPosition.y <= i &&
                                 graphic.node.globalPosition.y > i-1) {
                                 renderQueue.push(graphic)
@@ -47,6 +50,7 @@ export class GraphicManager {
         //     layer.forEach((graphic) => {
         //         if (graphic.enabled &&
         //             graphic.node.enabled &&
+        //             graphic.node.scene &&
         //             graphic.node.scene.drawable) {
         //             context.scale(ServiceLocator.scale, ServiceLocator.scale);
         //             context.translate(graphic.node.globalPosition.x, graphic.node.globalPosition.y);

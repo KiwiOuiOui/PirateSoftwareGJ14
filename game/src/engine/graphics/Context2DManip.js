@@ -49,7 +49,6 @@ function invert(data, pixel = -1) {
         data[pixel * 4 + 2] ^= 255;
     }
     else {
-        console.log("invert all")
         for (var i = 0; i < data.length; i += 4) {
             data[i] ^= 255;
             data[i + 1] ^= 255;

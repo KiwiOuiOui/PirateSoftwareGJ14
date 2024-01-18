@@ -7,10 +7,9 @@ import { Player } from '../objects/Player.js';
 import { ServiceLocator } from '../engine/ServiceLocator.js';
 import { Platform3D } from '../objects/Platform3D';
 import { Stairs } from '../objects/Stairs';
-import { SecondScene } from './SecondScene';
 
-export class FirstScene extends Scene {
-    initialize() {
+export class SecondScene extends Scene {
+    initialize(lastScene) {
         ServiceLocator.error("init Scene ", this.name);
 
         //FPS indicator
@@ -33,24 +32,17 @@ export class FirstScene extends Scene {
         this.root.addChild(borderrightATH);
 
 
-        let platform = new Platform3D("platform", new Vector(120, 20), new Vector(10, 10), -1) //9)
+        let platform = new Platform3D("platform 2nd floor", new Vector(80, 60), new Vector(10, 10), -1) //9)
         this.root.addChild(platform);
-
         let stairs = new Stairs("stairs", new Vector(200, 60), new Vector(20, 40), -1) //9)
-        let secondFloor = new SecondScene("second floor");
-        secondFloor.initialize(this);
-        stairs.leadsTo(secondFloor);
+        stairs.leadsTo(lastScene);
         this.root.addChild(stairs);
-
-        let player = new Player("Victor");
-        player.position = new Vector(50, 140);
-        this.root.addChild(player);
 
         this.initialized = true;
     }
 
     enable() {
         super.enable();
-        ServiceLocator.graphicManager.changePalette('ice');
+        ServiceLocator.graphicManager.changePalette('icecream');
     }
 }

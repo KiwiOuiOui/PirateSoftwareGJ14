@@ -140,6 +140,9 @@ class ServiceLocator {
     set game(game) {
         this._game = game;
     }
+    get game() {
+        return this._game;
+    }
 };
 
 let instance = new ServiceLocator();

@@ -57,7 +57,8 @@ export class ComponentManager {
             return;
         this._colliders.forEach((collider1) => {
             this._colliders.forEach((collider2) => {
-                if (collider1.node.scene == collider2.node.scene &&
+                if (collider1.node.scene._updatable &&
+                    collider1.node.scene == collider2.node.scene &&
                     collider1.node != collider2.node &&
                     collider1.enabled &&
                     collider2.enabled) {

@@ -3,7 +3,7 @@ import { FirstScene } from '../scenes/FirstScene.js';
 
 export class Game {
 	constructor() {
-		this.scene = null;
+		this._scene = null;
 	}
 	
 	
@@ -12,8 +12,7 @@ export class Game {
 		ServiceLocator.initialize(this);
 		ServiceLocator.debugMode = 1;
 		
-		this._scene = new FirstScene("coucou");
-		this._scene.initialize();
+		this.changeScene(new FirstScene("first floor"));
 	}
 	
 	
@@ -57,8 +56,29 @@ export class Game {
 		});
 	}
 	
-	
+	changeScene(scene) {
+		if(!scene.initialized) {
+            scene.initialize(scene);
+			console.log("Scene initialization \""+scene.name+"\"...")
+			scene._initialized = true;
+        }
+
+		if(this._scene)
+        	this._scene.disable();
+        scene.enable();
+        
+
+        this._scene = scene;
+	}
+
 	end() {
 		ServiceLocator.running = false;
+	}
+
+	get scene() {
+		return this._scene;
+	}
+	set scene(s) {
+		this._scene = s;
 	}
 }
