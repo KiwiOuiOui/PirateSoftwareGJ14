@@ -2,12 +2,12 @@ import { Scene } from '../engine/Scene.js';
 import { Vector } from '../engine/maths/Vector.js';
 import { Debug } from '../objects/Debug.js';
 import { Platform } from '../objects/Platform.js';
-import { Wind } from '../objects/Wind.js';
 import { Player } from '../objects/Player.js';
 import { ServiceLocator } from '../engine/ServiceLocator.js';
 import { Platform3D } from '../objects/Platform3D';
 import { Stairs } from '../objects/Stairs';
 import { SecondScene } from './SecondScene';
+import { Couch } from '../objects/Couch';
 
 export class FirstScene extends Scene {
     initialize() {
@@ -33,10 +33,10 @@ export class FirstScene extends Scene {
         this.root.addChild(borderrightATH);
 
 
-        let platform = new Platform3D("platform", new Vector(120, 20), new Vector(10, 10), -1) //9)
-        this.root.addChild(platform);
+        let couch = new Couch("couch on 1st floor", new Vector(120, 40), -1) //9)
+        this.root.addChild(couch);
 
-        let stairs = new Stairs("stairs", new Vector(200, 60), new Vector(20, 40), -1) //9)
+        let stairs = new Stairs("stairs", new Vector(10, 10), new Vector(22, 36), -1) //9)
         let secondFloor = new SecondScene("second floor");
         secondFloor.initialize(this);
         stairs.leadsTo(secondFloor);

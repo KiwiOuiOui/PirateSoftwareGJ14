@@ -1,9 +1,9 @@
 import { ServiceLocator } from '../engine/ServiceLocator.js';
-import { Node } from '../engine/Node.js';
 import { Rectangle } from '../engine/maths/Rectangle.js';
 import { Vector } from '../engine/maths/Vector';
+import { SolidObject } from './SolidObject';
 
-export class Platform extends Node {
+export class Platform extends SolidObject {
     constructor(name, position, dimension, layer = 0) {
         super(name, position);
 
