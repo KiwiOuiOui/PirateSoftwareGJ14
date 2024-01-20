@@ -131,11 +131,11 @@ export class Player extends Node {
             }
             else if(1 == facing.x && 0 == facing.y) {
                 this._graphic._frame.y = 48;
-                this._graphic.lastFrameNb = 0
+                this._graphic.lastFrameNb = 7
             }
             else if(-1 == facing.x && 0 == facing.y) {
                 this._graphic._frame.y = 72;
-                this._graphic.lastFrameNb = 0
+                this._graphic.lastFrameNb = 7
             }
             else if(0 == facing.x && 1 == facing.y) {
                 this._graphic._frame.y = 0;
