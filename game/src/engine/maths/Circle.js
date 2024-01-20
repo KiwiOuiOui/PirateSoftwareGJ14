@@ -11,7 +11,7 @@ export class Circle {
     contains(x, y) {}
 
     draw(context) {
-        context.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
+        context.arc(Math.round(this.position.x), Math.round(this.position.y), this.radius, 0, 2 * Math.PI);
     }
 
     move(vector) {

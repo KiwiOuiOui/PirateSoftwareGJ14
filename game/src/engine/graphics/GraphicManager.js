@@ -33,7 +33,10 @@ export class GraphicManager {
                         if(graphic.node.globalPosition.y <= i &&
                             graphic.node.globalPosition.y > i-1) {
                                 context.scale(ServiceLocator.scale, ServiceLocator.scale);
-                                context.translate(graphic.node.globalPosition.x, graphic.node.globalPosition.y);
+                                context.translate(
+                                    Math.round(graphic.node.globalPosition.x),
+                                    Math.round(graphic.node.globalPosition.y)
+                                );
                                 graphic.draw(context);
                                 context.resetTransform();
                         }

@@ -13,7 +13,7 @@ export class Rectangle {
     }
 
     draw(context) {
-        context.rect(this.position.x, this.position.y, this.dimension.x, this.dimension.y)
+        context.rect(Math.round(this.position.x), Math.round(this.position.y), Math.round(this.dimension.x), Math.round(this.dimension.y))
     }
 
     move(vector) {

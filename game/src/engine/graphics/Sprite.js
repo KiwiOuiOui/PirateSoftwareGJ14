@@ -28,8 +28,8 @@ export class Sprite extends Graphic {
             this.frame.y, //getter because of animation computation
             this._frame.width,
             this._frame.height,
-            this._position.x * this._scale,
-            this._position.y * this._scale,
+            Math.round(this._position.x) * this._scale,
+            Math.round(this._position.y) * this._scale,
             this._frame.width * this._scale,
             this._frame.height * this._scale,
         );          
