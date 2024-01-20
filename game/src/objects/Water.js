@@ -43,7 +43,7 @@ export class Water extends Node {
         super(name, position);
 
         this._pressure = 20;
-        this._pressureSpeed = 10;
+        this._pressureSpeed = 3;
         this._dropletSize = 4;
         this._CD = 1/10;
         this._onCD = false;
@@ -57,12 +57,12 @@ export class Water extends Node {
         this.dropletSrc._source = this.dropletSrc;
         this._waterMap.set(x,y, this.dropletSrc);
 
-        this.position = new Vector(x * this._dropletSize, y * this._dropletSize);
+        this.position = new Vector(x * this._dropletSize +10, y * this._dropletSize +10);
 
         this._graphic = ServiceLocator.graphicManager.create("rectangle", this, layer);
         
         this._graphic.rectangle = new Rectangle(
-            new Vector(10, 10),
+            new Vector(0, 0),
             new Vector(this._dropletSize,this._dropletSize)
         );
         this._graphic.fill = "white";
@@ -105,7 +105,7 @@ export class Water extends Node {
             if(x < 0 || y < 0 || x >= 240/this._dropletSize || y >= 160/this._dropletSize )
                 return false;
             
-                ServiceLocator.error("yeha spread pos", x, y, Math.round(luck*1000)/10+"%", this._pressure);
+            //ServiceLocator.error("yeha spread pos", x, y, Math.round(luck*1000)/10+"%", this._pressure);
             //if(undefined == this._waterMap.get(x))
             let drop = new WaterDroplet(x,y);
             drop._source = this.dropletSrc;
@@ -113,7 +113,7 @@ export class Water extends Node {
             let dropletGraphic = ServiceLocator.graphicManager.create("rectangle", this, this._graphic.layer);
         
             dropletGraphic.rectangle = new Rectangle(
-                new Vector((x-this.dropletSrc._x)*this._dropletSize +10, (y-this.dropletSrc._y)*this._dropletSize +10),
+                new Vector((x-this.dropletSrc._x)*this._dropletSize, (y-this.dropletSrc._y)*this._dropletSize),
                 new Vector(this._dropletSize,this._dropletSize)
             );
             dropletGraphic.fill = "white";

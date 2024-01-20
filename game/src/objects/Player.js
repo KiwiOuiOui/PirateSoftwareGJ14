@@ -9,6 +9,7 @@ import { Stairs } from './Stairs';
 import { Game } from '../engine/Game';
 import { Scene } from '../engine/Scene';
 import { SolidObject } from './SolidObject';
+import { Water } from './Water';
 
 export class Player extends Node {
     constructor(name, position) {
@@ -51,6 +52,29 @@ export class Player extends Node {
                 if (event.code == "KeyD") {
                     this._controls.direction.right = 1;
                 }
+                if (event.code == "KeyK") {
+                    let down = this._velocity.desiredVelocity.dot(new Vector(0,-1));
+                    let up = this._velocity.desiredVelocity.dot(new Vector(0,1));
+                    let right = this._velocity.desiredVelocity.dot(new Vector(-1,0));
+                    let left = this._velocity.desiredVelocity.dot(new Vector(1,0));
+                    let winner = Math.min(up, left, right, down);
+                    let distance = 50;
+                    if(winner == up){
+                        console.error("up fired")
+                        let water = new Water("water try", this.globalPosition.add(new Vector(0,-distance)), -1) //9)
+                        this.scene.root.addChild(water);
+                        console.error(water.globalPosition, this.globalPosition)
+                    }
+                    else if(winner == down){
+                        console.error("down fired")
+                    }
+                    else if(winner == left){
+                        console.error("left fired")
+                    }
+                    else if(winner == right){
+                        console.error("right fired")
+                    }
+                }
             }
             if (event.type == "keyup") {
                 if (event.code == "KeyW") {
@@ -66,7 +90,6 @@ export class Player extends Node {
                     this._controls.direction.right = 0;
                 }
             }
-            //this._velocity.desiredVelocity.x = this._maxWalkingSpeed * (right - left);
         }
         this._controls.update = () => {
             let v = new Vector(0,0);

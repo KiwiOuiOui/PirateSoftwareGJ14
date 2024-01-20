@@ -36,8 +36,8 @@ export class FirstScene extends Scene {
 
         let couch = new Couch("couch on 1st floor", new Vector(120, 40), -1) //9)
         this.root.addChild(couch);
-        let water = new Water("water try", new Vector(120, 100), -1) //9)
-        this.root.addChild(water);
+        // let water = new Water("water try", new Vector(120, 100), -1) //9)
+        // this.root.addChild(water);
 
         let stairs = new Stairs("stairs", new Vector(10, 10), new Vector(22, 36), -1) //9)
         let secondFloor = new SecondScene("second floor");
