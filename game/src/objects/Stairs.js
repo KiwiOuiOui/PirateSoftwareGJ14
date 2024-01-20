@@ -46,11 +46,9 @@ export class Stairs extends SolidObject {
     use(player) {
         if(this._sceneToGoTo){
             ServiceLocator.error("using stairs to go to ", this._sceneToGoTo.name);
-            ServiceLocator.error("where is player ", player);
             player.parent.removeChild(player);
             this._sceneToGoTo.root.addChild(player);
             ServiceLocator.game.changeScene(this._sceneToGoTo);
-            ServiceLocator.error("where is player ", player);
         }
         else {
             ServiceLocator.error("no scene set in ", this.scene, this.scene.name);    

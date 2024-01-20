@@ -102,7 +102,7 @@ export class Player extends Node {
             return;
         }
         if (collider.node instanceof Stairs &&
-            0 < this._stairsAvailable) {
+            this._stairsAvailable) {
             //this.position = collider.node._landingPosition;
             collider.node.use(this);
 

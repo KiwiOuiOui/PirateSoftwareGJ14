@@ -38,7 +38,7 @@ export class Game {
 			//DRAW
 			ServiceLocator.canvasClear("#1c0d18");
 			ServiceLocator.graphicManager.draw(ServiceLocator.context);
-			ServiceLocator.graphicManager.applyShaders(ServiceLocator.context);
+			//ServiceLocator.graphicManager.applyShaders(ServiceLocator.context);
 			ServiceLocator.debug("Frame #" + ServiceLocator._FPSCounter.frameNb);
 		}
 		ServiceLocator.clockManager.update();
@@ -51,9 +51,7 @@ export class Game {
 			ServiceLocator.componentManager.update();
 		}
 		
-		ServiceLocator.animationFrameCode = window.requestAnimationFrame((timestamp) => {
-			this.loop(timestamp);
-		});
+		ServiceLocator.animationFrameCode = window.requestAnimationFrame((timestamp) => this.loop(timestamp));
 	}
 	
 	changeScene(scene) {

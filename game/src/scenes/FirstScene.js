@@ -8,6 +8,7 @@ import { Platform3D } from '../objects/Platform3D';
 import { Stairs } from '../objects/Stairs';
 import { SecondScene } from './SecondScene';
 import { Couch } from '../objects/Couch';
+import { Water } from '../objects/Water';
 
 export class FirstScene extends Scene {
     initialize() {
@@ -17,8 +18,8 @@ export class FirstScene extends Scene {
         //let debug = new Debug("debug");
         //this.root.addChild(debug);
 
-        let h = ServiceLocator.context.canvas.height;
-        let w = ServiceLocator.context.canvas.width;
+        let h = ServiceLocator.context.canvas.height/ServiceLocator.scale;
+        let w = ServiceLocator.context.canvas.width/ServiceLocator.scale;
 
         //border of the game
         let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
@@ -35,6 +36,8 @@ export class FirstScene extends Scene {
 
         let couch = new Couch("couch on 1st floor", new Vector(120, 40), -1) //9)
         this.root.addChild(couch);
+        let water = new Water("water try", new Vector(120, 100), -1) //9)
+        this.root.addChild(water);
 
         let stairs = new Stairs("stairs", new Vector(10, 10), new Vector(22, 36), -1) //9)
         let secondFloor = new SecondScene("second floor");

@@ -23,27 +23,45 @@ export class GraphicManager {
         ServiceLocator.FPSCounter.update()
         //drawing in Y order then by layer
         for (let i = 0; i <= ServiceLocator.context.canvas.height/ServiceLocator.scale; i++) {
-            let renderQueue = [];
-            this._graphics.forEach((layer) => {
-                layer.forEach((graphic) => {
-                    if (graphic.node.scene &&
-                        graphic.node.scene.drawable &&
+            for (let layerKey of this._graphics.keys()) {
+                for (let graphicKey of this._graphics.get(layerKey).keys()) {
+                    let graphic = this._graphics.get(layerKey)[graphicKey];
+                //this._graphics.get(layerKey).forEach((graphic) => {
+                    if (graphic.node.scene.drawable &&
                         graphic.node.enabled &&
                         graphic.enabled) {
-                            if(graphic.node.globalPosition.y <= i &&
-                                graphic.node.globalPosition.y > i-1) {
-                                renderQueue.push(graphic)
-                            }
+                        if(graphic.node.globalPosition.y <= i &&
+                            graphic.node.globalPosition.y > i-1) {
+                                context.scale(ServiceLocator.scale, ServiceLocator.scale);
+                                context.translate(graphic.node.globalPosition.x, graphic.node.globalPosition.y);
+                                graphic.draw(context);
+                                context.resetTransform();
                         }
-                });
-            });
+                    }
+                }
+            }
+            //let renderQueue = [];
 
-            renderQueue.forEach((graphic) => {
-                context.scale(ServiceLocator.scale, ServiceLocator.scale);
-                context.translate(graphic.node.globalPosition.x, graphic.node.globalPosition.y);
-                graphic.draw(context);
-                context.resetTransform();
-            });
+            // this._graphics.forEach((layer) => {
+            //     layer.forEach((graphic) => {
+            //         if (graphic.node.scene &&
+            //             graphic.node.scene.drawable &&
+            //             graphic.node.enabled &&
+            //             graphic.enabled) {
+            //                 if(graphic.node.globalPosition.y <= i &&
+            //                     graphic.node.globalPosition.y > i-1) {
+            //                     renderQueue.push(graphic)
+            //                 }
+            //             }
+            //     });
+            // });
+
+            // renderQueue.forEach((graphic) => {
+            //     context.scale(ServiceLocator.scale, ServiceLocator.scale);
+            //     context.translate(graphic.node.globalPosition.x, graphic.node.globalPosition.y);
+            //     graphic.draw(context);
+            //     context.resetTransform();
+            // });
         }
         // drawing by layer
         // this._graphics.forEach((layer) => {
