@@ -39,6 +39,14 @@ export class AnimatedSprite extends Sprite {
         }
     }
 
+    resetAnim() {
+        this._animFrame.x = this._frame.x;
+        this._animFrame.y = this._frame.y;
+        this._animFrame.width = this._frame.width;
+        this._animFrame.height = this._frame.height;    
+        this.curentFrameNb = 0;
+        this.elapsed = 0;
+    }
     computeFrame() {
         if(0 == this.curentFrameNb)
         {

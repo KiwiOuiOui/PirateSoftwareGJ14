@@ -116,7 +116,7 @@ export class Water extends Node {
                 new Vector((x-this.dropletSrc._x)*this._dropletSize, (y-this.dropletSrc._y)*this._dropletSize),
                 new Vector(this._dropletSize,this._dropletSize)
             );
-            dropletGraphic.fill = "white";
+            dropletGraphic.fill = "#7dadf5";
             dropletGraphic.stroke = "transparent";    
             return true;
         }
