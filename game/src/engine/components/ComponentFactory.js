@@ -1,5 +1,5 @@
 import { ServiceLocator } from '../ServiceLocator.js';
-import { Button } from '../../components/ButtonComponent.js';
+import { ButtonComponent } from '../../components/ButtonComponent.js';
 import { RectangleCollider } from '../../components/RectangleCollider.js';
 import { CircleCollider } from '../../components/CircleCollider.js';
 import { PauseKeyComponent } from '../../components/PauseKeyComponent.js';
@@ -13,9 +13,9 @@ export class ComponentFactory {
     static initialize() {
         this.registerComponent("PauseKey", PauseKeyComponent);
         this.registerComponent("ButtonHitBox", ButtonHitBox);
+        this.registerComponent("ButtonComponent", ButtonComponent);
         this.registerComponent("RectangleCollider", RectangleCollider);
         this.registerComponent("CircleCollider", CircleCollider);
-        this.registerComponent("Button", Button);
         this.registerComponent("Physics", PhysicsComponent);
         this.registerComponent("ForceComponent", ForceComponent);
         this.registerComponent("PlayerControls", PlayerControls);

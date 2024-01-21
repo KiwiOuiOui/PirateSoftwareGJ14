@@ -42,16 +42,16 @@ export class Player extends Node {
         };
         this._controls.onEvent = (event) => {
             if (event.type == "keydown") {
-                if (event.code == "KeyW") {
+                if (event.code == ServiceLocator.game.commands.up.code) {
                     this._controls.direction.up = 1;
                 }
-                if (event.code == "KeyA") {
+                if (event.code == ServiceLocator.game.commands.left.code) {
                     this._controls.direction.left = 1;
                 }
-                if (event.code == "KeyS") {
+                if (event.code == ServiceLocator.game.commands.down.code) {
                     this._controls.direction.down = 1;
                 }
-                if (event.code == "KeyD") {
+                if (event.code == ServiceLocator.game.commands.right.code) {
                     this._controls.direction.right = 1;
                 }
                 if (event.code == "KeyK") {
@@ -62,16 +62,16 @@ export class Player extends Node {
                 }
             }
             if (event.type == "keyup") {
-                if (event.code == "KeyW") {
+                if (event.code == ServiceLocator.game.commands.up.code) {
                     this._controls.direction.up = 0;
                 }
-                if (event.code == "KeyA") {
+                if (event.code == ServiceLocator.game.commands.left.code) {
                     this._controls.direction.left = 0;
                 }
-                if (event.code == "KeyS") {
+                if (event.code == ServiceLocator.game.commands.down.code) {
                     this._controls.direction.down = 0;
                 }
-                if (event.code == "KeyD") {
+                if (event.code == ServiceLocator.game.commands.right.code) {
                     this._controls.direction.right = 0;
                 }
             }
@@ -97,7 +97,7 @@ export class Player extends Node {
     }
 
     facing() {
-        if(this._velocity.velocity.magnitude < 0.1)
+        if(this._velocity.velocity.magnitude < 4)
             return new Vector(0, 0);
         let down = this._velocity.velocity.dot(new Vector(0,-1));
         let up = this._velocity.velocity.dot(new Vector(0,1));

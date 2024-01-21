@@ -1,17 +1,39 @@
 import { ServiceLocator } from './ServiceLocator.js';
 import { FirstScene } from '../scenes/FirstScene.js';
+import { Menu } from '../scenes/menu';
 
 export class Game {
 	constructor() {
 		this._scene = null;
+		this._settingsScene = null;
+		this.commands = {
+			up : {
+                code : 'KeyW', 
+                value : 'W'
+            },
+			down : {
+                code : 'KeyS', 
+                value : 'S'
+            },
+			left : {
+                code : 'KeyA', 
+                value : 'A'
+            },
+			right : {
+                code : 'KeyD', 
+                value : 'D'
+            }
+		};
 	}
 	
 	
 	initialize() {
-		ServiceLocator.createCanvas(320, 180, 2);
+		ServiceLocator.createCanvas(320, 180, 3);
 		ServiceLocator.initialize(this);
 		ServiceLocator.debugMode = 1;
 		
+		this._settingsScene = new Menu("menu");
+
 		this.changeScene(new FirstScene("first floor"));
 	}
 	
@@ -61,11 +83,12 @@ export class Game {
 			scene._initialized = true;
         }
 
-		if(this._scene)
-        	this._scene.disable();
+		if(this._scene){
+			this._scene.disable();
+		}
         scene.enable();
         
-
+		scene._lastScene = this._scene;
         this._scene = scene;
 	}
 

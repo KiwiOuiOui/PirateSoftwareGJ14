@@ -2,7 +2,7 @@ import { ServiceLocator } from '../engine/ServiceLocator.js';
 import { Component } from '../engine/components/Component.js';
 import { ComponentFactory } from '../engine/components/ComponentFactory.js';
 
-export class Button extends Component {
+export class ButtonComponent extends Component {
     constructor(node, enabled = true) {
         super(node, enabled);
         this._hover = false;
@@ -54,15 +54,15 @@ export class Button extends Component {
             this._hover = this.checkMouseHover(event.canvasX, event.canvasY);
 
             if (flag === false && this._hover === true) {
-                this._onEnter();
+                this._onEnter(event);
             }
             else if (flag === true && this._hover === false) {
-                this._onLeave();
+                this._onLeave(event);
             }
         }
         else if (event.type == "mouseup") {
             if (this._hover)
-                this._onClick();
+                this._onClick(event);
         }
     }
 

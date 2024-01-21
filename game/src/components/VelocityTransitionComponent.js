@@ -28,11 +28,25 @@ export class VelocityTransition extends Velocity {
     }
 
     update() {
-
         let delta = this.node.scene.clock.multiplier * ServiceLocator.clockManager.dtime;
-        this.velocity = this.velocity.multiply(1 - delta * this._transitionSpeed).add(this._desiredVelocity.multiply(delta * this._transitionSpeed));
+        let a = 1 - delta * this._transitionSpeed;
+        if(a < 1)
+            a = 0;
+        this.velocity = this.velocity.multiply(1 - delta * this._transitionSpeed);
 
-        ServiceLocator.debug("[" + this.node.name + "] in vel comp - desired :", this._desiredVelocity);
+        if(0 == a && (0 == this._desiredVelocity.x && 0 == this._desiredVelocity.y))
+        {
+            if(this.velocity.magnitude < 0.01) {
+                this.velocity = new Vector(0, 0);
+                ServiceLocator.debug("[" + this.node.name + "] in vel comp - at rest :", this.velocity);    
+            }
+            else
+                ServiceLocator.debug("[" + this.node.name + "] in vel comp - slowing :", this.velocity);    
+        }
+        else {
+            this.velocity = this.velocity.add(this._desiredVelocity.multiply(delta * this._transitionSpeed));
+            ServiceLocator.debug("[" + this.node.name + "] in vel comp - desired :", this._desiredVelocity);    
+        }
 
         super.update();
     }

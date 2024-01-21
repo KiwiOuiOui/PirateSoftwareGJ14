@@ -9,6 +9,8 @@ import { Stairs } from '../objects/Stairs';
 import { SecondScene } from './SecondScene';
 import { Couch } from '../objects/Couch';
 import { Water } from '../objects/Water';
+import { Button } from '../objects/Button';
+import { Rectangle } from '../engine/maths/Rectangle';
 
 export class FirstScene extends Scene {
     initialize() {
@@ -48,6 +50,19 @@ export class FirstScene extends Scene {
         let player = new Player("Victor");
         player.position = new Vector(50, 140);
         this.root.addChild(player);
+
+
+
+        let settingsBtn = new Button("bindsBtn", new Vector(260, 150), "SETTINGS")
+        this.root.addChild(settingsBtn);
+
+        settingsBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(50, 10));
+        settingsBtn.onClick = () => {
+            ServiceLocator.clockManager.addTimer(200).action = () => {
+                ServiceLocator.context.canvas.style.cursor = "auto";
+                ServiceLocator.game.changeScene(ServiceLocator.game._settingsScene);
+            };
+        }
 
         this.initialized = true;
     }

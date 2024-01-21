@@ -18,6 +18,8 @@ export class Scene {
 
         this._clock = ServiceLocator.clockManager.addClock();
 
+        this._lastScene = null;
+
         ServiceLocator.debug("Scene \"" + name + "\" created...", this);
 
         //this._destroyNodeList = [];
