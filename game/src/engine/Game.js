@@ -8,7 +8,7 @@ export class Game {
 	
 	
 	initialize() {
-		ServiceLocator.createCanvas(320, 180, 4);
+		ServiceLocator.createCanvas(320, 180, 2);
 		ServiceLocator.initialize(this);
 		ServiceLocator.debugMode = 1;
 		

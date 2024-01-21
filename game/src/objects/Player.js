@@ -138,18 +138,17 @@ export class Player extends Node {
                 this._graphic.lastFrameNb = 7
             }
             else if(0 == facing.x && 1 == facing.y) {
-                this._graphic._frame.y = 0;
-                this._graphic.lastFrameNb = 5
+                this._graphic._frame.y = 96;
+                this._graphic.lastFrameNb = 7
             }
             else if(0 == facing.x && -1 == facing.y) {
-                this._graphic._frame.y = 24;
-                this._graphic.lastFrameNb = 5
+                this._graphic._frame.y = 120;
+                this._graphic.lastFrameNb = 7
             }
             this._graphic.resetAnim();
         }
-        else{
+        else {
             this._graphic.checkNextFrameOrNotAndProceed()
-
         }
     }
 

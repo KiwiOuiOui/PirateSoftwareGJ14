@@ -11,7 +11,7 @@ export class AnimatedSprite extends Sprite {
         this.lastFrameNb = 1; // default 1 to see that it is animated even if not overwritten
         this.curentFrameNb = 0;
         this.frameDuration = 1; // en frame ou en ms;
-        this.miliDuration = 150;
+        this.miliDuration = 100;
         this._frameOrMili = 'mili';
         this.elapsed = 0;
         this.direction = 'horizontal'; // or vertical
