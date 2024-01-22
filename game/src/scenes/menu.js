@@ -20,12 +20,6 @@ export class Menu extends Scene {
                 ServiceLocator.game.changeScene(this._lastScene);
             };
         }
-        let bindtext = new Button("bindtext", new Vector(240, 20), "COMMANDS")
-        this.root.addChild(bindtext);
-
-        bindtext.hitbox = new Rectangle(new Vector(0,0), new Vector(50, 10));
-        bindtext.onClick = () => {
-        }
 
         let inputUp = new InputBox("upBindBtn", new Vector(68,54 - 15), ServiceLocator.game.commands.up.value)
         this.root.addChild(inputUp);
