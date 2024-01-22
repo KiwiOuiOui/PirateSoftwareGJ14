@@ -34,56 +34,6 @@ export class Player extends Node {
 
         this._controls = ServiceLocator.componentManager.create("PlayerControls", this);
         this._controls.initialize();
-        this._controls.direction = {
-            left : 0,
-            right : 0,
-            up : 0,
-            down : 0
-        };
-        this._controls.onEvent = (event) => {
-            if (event.type == "keydown") {
-                if (event.code == ServiceLocator.game.commands.up.code) {
-                    this._controls.direction.up = 1;
-                }
-                if (event.code == ServiceLocator.game.commands.left.code) {
-                    this._controls.direction.left = 1;
-                }
-                if (event.code == ServiceLocator.game.commands.down.code) {
-                    this._controls.direction.down = 1;
-                }
-                if (event.code == ServiceLocator.game.commands.right.code) {
-                    this._controls.direction.right = 1;
-                }
-                if (event.code == ServiceLocator.game.commands.a.code) {
-                    let facing = this.facing();
-                    let distance = 50;
-                    let water = new Water("water try", this.globalPosition.add(facing.multiply(distance)), -1) //9)
-                    this.scene.root.addChild(water);
-                }
-            }
-            if (event.type == "keyup") {
-                if (event.code == ServiceLocator.game.commands.up.code) {
-                    this._controls.direction.up = 0;
-                }
-                if (event.code == ServiceLocator.game.commands.left.code) {
-                    this._controls.direction.left = 0;
-                }
-                if (event.code == ServiceLocator.game.commands.down.code) {
-                    this._controls.direction.down = 0;
-                }
-                if (event.code == ServiceLocator.game.commands.right.code) {
-                    this._controls.direction.right = 0;
-                }
-            }
-        }
-        this._controls.update = () => {
-            let v = new Vector(0,0);
-            v.x += this._maxWalkingSpeed*(this._controls.direction.right-this._controls.direction.left);
-            v.y += this._maxWalkingSpeed*(this._controls.direction.down-this._controls.direction.up);
-
-            this._velocity.desiredVelocity = v; 
-        }
-
 
         this._collider = ServiceLocator.componentManager.create("RectangleCollider", this);
         ServiceLocator.componentManager.addCollider(this._collider);

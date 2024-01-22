@@ -90,6 +90,13 @@ class ServiceLocator {
             console.error("frame #" + this._FPSCounter.frameNb, ...args);
         }
     }
+    breakpoint(){
+        if (this._debugMode >= 1) {
+            this._clockManager.pause();
+            debugger;
+            this._clockManager.resume();
+        }
+    }
 
     // static auto sceneManager() - > SceneManager * { return _instance._sceneManager; }
     // static auto fontManager() - > FontManager * { return _instance._fontManager; }
