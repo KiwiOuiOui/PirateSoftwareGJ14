@@ -27,7 +27,7 @@ export class Player extends Node {
 
         this._velocity = ServiceLocator.componentManager.create("VelocityTransition", this);
         this._maxWalkingSpeed = 100;
-        this._velocity.transitionSpeed = 10;
+        this._velocity.transitionSpeed = 20;
 
         this._pauseBtn = ServiceLocator.componentManager.create("PauseKey", this);
         this._pauseBtn.initialize();
@@ -54,7 +54,7 @@ export class Player extends Node {
                 if (event.code == ServiceLocator.game.commands.right.code) {
                     this._controls.direction.right = 1;
                 }
-                if (event.code == "KeyK") {
+                if (event.code == ServiceLocator.game.commands.a.code) {
                     let facing = this.facing();
                     let distance = 50;
                     let water = new Water("water try", this.globalPosition.add(facing.multiply(distance)), -1) //9)

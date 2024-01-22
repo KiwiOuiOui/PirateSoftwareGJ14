@@ -22,6 +22,14 @@ export class Game {
 			right : {
                 code : 'KeyD', 
                 value : 'D'
+            },
+			a : {
+                code : 'KeyO', 
+                value : 'O'
+            },
+			b : {
+                code : 'KeyK', 
+                value : 'K'
             }
 		};
 	}
