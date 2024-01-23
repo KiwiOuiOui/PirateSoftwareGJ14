@@ -11,6 +11,7 @@ import { Couch } from '../objects/Couch';
 import { Water } from '../objects/Water';
 import { Button } from '../objects/Button';
 import { Rectangle } from '../engine/maths/Rectangle';
+import spriteSrc from '/assets/sprite.png';
 
 export class FirstScene extends Scene {
     initialize() {
@@ -53,10 +54,17 @@ export class FirstScene extends Scene {
 
 
 
-        let settingsBtn = new Button("bindsBtn", new Vector(260, 150), "SETTINGS")
+        let settingsBtn = new Button("bindsBtn", new Vector(267, 125), "")
         this.root.addChild(settingsBtn);
 
-        settingsBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(50, 10));
+        let sprite = new Image(320, 180);
+        sprite.src = spriteSrc;
+
+        settingsBtn.sprite = ServiceLocator.graphicManager.create("sprite", settingsBtn, 2);
+        settingsBtn.sprite.image = sprite
+        settingsBtn.sprite.frame = new Rectangle(new Vector(240,36),new Vector(12*3,12*3));
+
+        settingsBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(12*3,12*3));
         settingsBtn.onClick = () => {
             ServiceLocator.clockManager.addTimer(200).action = () => {
                 ServiceLocator.context.canvas.style.cursor = "auto";

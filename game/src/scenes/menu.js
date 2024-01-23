@@ -101,17 +101,15 @@ export class Menu extends Scene {
         let sprite = new Image(320, 180);
         sprite.src = spriteSrc;
 
-        let DPadGraphic = ServiceLocator.graphicManager.create("animSprite", this.root, 2);
+        let DPadGraphic = ServiceLocator.graphicManager.create("sprite", this.root, 2);
         DPadGraphic.image = sprite
         DPadGraphic.frame = new Rectangle(new Vector(192,0),new Vector(12*4,12*4));
         DPadGraphic.position = new Vector(50, 50);
-        DPadGraphic.lastFrameNb = 5
 
-        let buttonsGraphic = ServiceLocator.graphicManager.create("animSprite", this.root, 2);
+        let buttonsGraphic = ServiceLocator.graphicManager.create("sprite", this.root, 2);
         buttonsGraphic.image = sprite
         buttonsGraphic.frame = new Rectangle(new Vector(240,0),new Vector(12*4,12*3));
         buttonsGraphic.position = new Vector(50, 120);
-        buttonsGraphic.lastFrameNb = 5
 
 
         this.initialized = true;
