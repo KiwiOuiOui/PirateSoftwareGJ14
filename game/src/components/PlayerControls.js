@@ -24,16 +24,37 @@ export class PlayerControls extends Component {
         super.onEvent(event)
         if (event.type == "keydown") {
             if (event.code == ServiceLocator.game.commands.up.code) {
-                this.direction.up = 1;
+                if(0 == this.direction.up)
+                {
+                    this.direction.up = 1;
+                    this.computeSpeed();
+                } else
+                    this.direction.up = 1;
             }
             if (event.code == ServiceLocator.game.commands.left.code) {
-                this.direction.left = 1;
+                if(0 == this.direction.left)
+                {
+                    this.direction.left = 1;
+                    this.computeSpeed();
+                }
+                else
+                    this.direction.left = 1;
             }
             if (event.code == ServiceLocator.game.commands.down.code) {
-                this.direction.down = 1;
+                if(0 == this.direction.down)
+                {
+                    this.direction.down = 1
+                    this.computeSpeed();
+                } else
+                    this.direction.down = 1;
             }
             if (event.code == ServiceLocator.game.commands.right.code) {
-                this.direction.right = 1;
+                if(0 == this.direction.right)
+                {
+                    this.direction.right = 1;
+                    this.computeSpeed();
+                } else
+                    this.direction.right = 1;
             }
             if (event.code == ServiceLocator.game.commands.a.code) {
                 let facing = this.node.facing();
@@ -44,26 +65,58 @@ export class PlayerControls extends Component {
         }
         if (event.type == "keyup") {
             if (event.code == ServiceLocator.game.commands.up.code) {
-                this.direction.up = 0;
+                if(1 == this.direction.up)
+                {
+                    this.direction.up = 0;
+                    this.computeSpeed();
+                } else
+                    this.direction.up = 0;
             }
             if (event.code == ServiceLocator.game.commands.left.code) {
-                this.direction.left = 0;
+                if(1 == this.direction.left)
+                {
+                    this.direction.left = 0;
+                    this.computeSpeed();
+                } else
+                    this.direction.left = 0;
             }
             if (event.code == ServiceLocator.game.commands.down.code) {
-                this.direction.down = 0;
+                if(1 == this.direction.down)
+                {
+                    this.direction.down = 0;
+                    this.computeSpeed();
+                } else
+                    this.direction.down = 0;
             }
             if (event.code == ServiceLocator.game.commands.right.code) {
-                this.direction.right = 0;
+                if(1 == this.direction.right)
+                {
+                    this.direction.right = 0;
+                    this.computeSpeed();
+                } else
+                    this.direction.right = 0;
             }
         }
     }
-    
-    update() {
-        super.update();
+    computeSpeed() {
         let v = new Vector(0,0);
         v.x += this.node._maxWalkingSpeed*(this.direction.right-this.direction.left);
         v.y += this.node._maxWalkingSpeed*(this.direction.down-this.direction.up);
 
-        this.node._velocity.desiredVelocity = v; 
+        if(0 == v.x && 0 == v.y){
+            this.node._velocity.launch({
+                endVelocity : v,
+                duration : .1
+            });     
+        }
+        else {
+            this.node._velocity.launch({
+                endVelocity : v,
+                duration : .3
+            });     
+        }
+    }
+    update() {
+        super.update();
     }
 }

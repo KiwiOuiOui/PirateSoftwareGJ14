@@ -22,7 +22,7 @@ export class Player extends Node {
 
         this._velocity = ServiceLocator.componentManager.create("VelocityTransition", this);
         this._maxWalkingSpeed = 100;
-        this._velocity.transitionSpeed = 20;
+        this._velocity.transitionSpeed = 1;
 
         this._pauseBtn = ServiceLocator.componentManager.create("PauseKey", this);
         this._pauseBtn.initialize();
@@ -125,25 +125,24 @@ export class Player extends Node {
             let intersect = ownHitbox.intersect(colHitbox);
             let intersectCenter = intersect.center;
 
-
             if(ownCenter.y < colHitbox.y) {
                 this._velocity._velocity.y = 0;
-                this._velocity._desiredVelocity.y = 0;
+                //this._velocity._desiredVelocity.y = 0;
                 this.move(new Vector(0,-1*intersect.height));
             }
             if(ownCenter.y > colHitbox.y+colHitbox.height) {
                 this._velocity._velocity.y = 0;
-                this._velocity._desiredVelocity.y = 0;
+                //this._velocity._desiredVelocity.y = 0;
                 this.move(new Vector(0,intersect.height));
             }
             if(ownCenter.x < colHitbox.x) {
                 this._velocity._velocity.x = 0;
-                this._velocity._desiredVelocity.x = 0;
+                //this._velocity._desiredVelocity.x = 0;
                 this.move(new Vector(-1*intersect.width,0));
             }
             if(ownCenter.x > colHitbox.x+colHitbox.width) {
                 this._velocity._velocity.x = 0;
-                this._velocity._desiredVelocity.x = 0;
+                //this._velocity._desiredVelocity.x = 0;
                 this.move(new Vector(intersect.width,0));
             }
             return;
