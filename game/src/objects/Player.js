@@ -2,15 +2,10 @@ import { ServiceLocator } from '../engine/ServiceLocator.js';
 import { Node } from '../engine/Node.js';
 import { Vector } from '../engine/maths/Vector.js';
 import { Rectangle } from '../engine/maths/Rectangle.js';
-import { Platform } from './Platform.js';
-import spriteSrc from '/assets/sprite.png';
 import { ForceComponent } from '../components/ForceComponent';
 import { Stairs } from './Stairs';
-import { Game } from '../engine/Game';
-import { Scene } from '../engine/Scene';
+import spriteSrc from '/assets/sprite.png';
 import { SolidObject } from './SolidObject';
-import { Water } from './Water';
-import { Velocity } from '../components/VelocityComponent';
 
 export class Player extends Node {
     constructor(name, position) {

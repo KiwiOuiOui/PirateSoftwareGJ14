@@ -1,5 +1,5 @@
-import { Collider } from './Collider.js';
 import { Vector } from '../engine/maths/Vector.js';
+import { Collider } from '../engine/components/Collider';
 
 export class ForceComponent extends Collider {
     constructor(node, enabled = true) {

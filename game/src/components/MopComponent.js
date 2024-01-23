@@ -1,8 +1,8 @@
 import { ServiceLocator } from '../engine/ServiceLocator.js';
-import { Collider } from './Collider.js';
 import { Rectangle } from '../engine/maths/Rectangle.js';
 import { Vector } from '../engine/maths/Vector.js';
 import { Water } from '../objects/Water';
+import { Collider } from '../engine/components/Collider';
 
 export class MopComponent extends RectangleCollider {
     constructor(node, enabled = true) {

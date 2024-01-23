@@ -1,5 +1,5 @@
-import { ServiceLocator } from '../engine/ServiceLocator.js';
-import { Component } from '../engine/components/Component.js';
+import { ServiceLocator } from '../ServiceLocator.js';
+import { Component } from './Component.js';
 
 export class Collider extends Component {
     constructor(node, enabled = true) {

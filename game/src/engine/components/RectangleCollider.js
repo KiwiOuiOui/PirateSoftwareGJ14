@@ -1,7 +1,7 @@
-import { ServiceLocator } from '../engine/ServiceLocator.js';
+import { ServiceLocator } from '../ServiceLocator.js';
 import { Collider } from './Collider.js';
-import { Rectangle } from '../engine/maths/Rectangle.js';
-import { Vector } from '../engine/maths/Vector.js';
+import { Rectangle } from '../maths/Rectangle.js';
+import { Vector } from '../maths/Vector.js';
 
 export class RectangleCollider extends Collider {
     constructor(node, enabled = true) {

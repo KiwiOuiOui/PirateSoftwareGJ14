@@ -1,7 +1,7 @@
-import { ServiceLocator } from '../engine/ServiceLocator.js';
-import { Collider } from './/Collider.js';
-import { Circle } from '../engine/maths/Circle.js';
-import { Vector } from '../engine/maths/Vector.js';
+import { ServiceLocator } from '../ServiceLocator.js';
+import { Collider } from './Collider.js';
+import { Circle } from '../maths/Circle.js';
+import { Vector } from '../maths/Vector.js';
 
 export class CircleCollider extends Collider {
     constructor(node, enabled = true) {

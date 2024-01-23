@@ -1,7 +1,7 @@
 import { ServiceLocator } from '../ServiceLocator.js';
 import { ButtonComponent } from '../../components/ButtonComponent.js';
-import { RectangleCollider } from '../../components/RectangleCollider.js';
-import { CircleCollider } from '../../components/CircleCollider.js';
+import { RectangleCollider } from './RectangleCollider.js';
+import { CircleCollider } from './CircleCollider.js';
 import { PauseKeyComponent } from '../../components/PauseKeyComponent.js';
 import { ButtonHitBox } from '../../components/ButtonHitBox.js';
 import { PlayerControls } from '../../components/PlayerControls.js';
