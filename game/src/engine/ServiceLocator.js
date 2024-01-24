@@ -81,7 +81,7 @@ class ServiceLocator {
     }
 
     debug(...args) {
-        if (this._debugMode >= 1) {
+        if (this._debugMode >= 2) {
             console.debug(/*"frame #" + this._FPSCounter.frameNb, */...args);
         }
     }

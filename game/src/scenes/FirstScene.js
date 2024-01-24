@@ -8,7 +8,7 @@ import { Platform3D } from '../objects/Platform3D';
 import { Stairs } from '../objects/Stairs';
 import { SecondScene } from './SecondScene';
 import { Couch } from '../objects/Couch';
-import { Water } from '../objects/Water';
+import { WaterDamage } from '../objects/Water';
 import { Button } from '../objects/Button';
 import { Rectangle } from '../engine/maths/Rectangle';
 import spriteSrc from '/assets/sprite.png';
@@ -37,11 +37,8 @@ export class FirstScene extends Scene {
         this.root.addChild(borderrightATH);
 
 
-        let couch = new Couch("couch on 1st floor", new Vector(120, 40), -1) //9)
+        let couch = new Couch("couch on 1st floor", new Vector(180, 40), -1) //9)
         this.root.addChild(couch);
-
-        // let water = new Water("water try", new Vector(120, 100), -1) //9)
-        // this.root.addChild(water);
 
         let stairs = new Stairs("stairs", new Vector(10, 10), new Vector(22, 36), -1) //9)
         let secondFloor = new SecondScene("second floor");

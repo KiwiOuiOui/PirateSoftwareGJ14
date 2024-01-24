@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="./waterMap.png" alt="">
+    <script>window.addEventListener('load', function () {
+        //alert("It's loaded!")
+        let frame = {x:0,y:0,width:60,height:40};
+
+        let canvas = document.createElement('canvas');
+        canvas.width = frame.width;
+        canvas.height = frame.height;
+        let img = document.querySelector("img");
+
+        let body = document.getElementsByTagName("body")[0];
+        body.appendChild(canvas);
+
+        let ctx = canvas.getContext("2d");
+
+        ctx.drawImage(img, 0, 0, frame.height, frame.width,0, 0, frame.height, frame.width);
+        let data = ctx.getImageData(0, 0, frame.height, frame.width).data;
+        let formatted = [];
+        for (let x = 0; x < frame.width; x++) {
+            for (let y = 0; y < frame.height; y++) {
+                let coord = x + frame.height*y;
+                let drop = {
+                    x : x,
+                    y : y,
+                    prio : 0,
+                    source : false
+                }
+                drop.prio = Math.min(data[coord*4], data[coord*4+3]);
+
+                if(null == this.source &&
+                    255 == data[coord*4] &&
+                    0 == data[coord*4 +1] &&
+                    0 == data[coord*4 +2])
+                {
+                    drop.source = true;
+                    console.error(x, y, coord, data[coord*4], data[coord*4+3])
+                }
+                formatted.push(drop);
+            }                
+        }
+
+        console.log(formatted)
+        console.log(JSON.stringify(formatted))
+      })
+    </script>
+    <style>
+        img {
+            display : none;
+        }
+    </style>
+</body>
+</html>

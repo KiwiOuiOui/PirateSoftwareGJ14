@@ -138,7 +138,10 @@ export class Node {
     
     update() {
         this.onUpdate();
-        this._children.forEach((child) => child.update())
+        this._children.forEach((child) => {
+            if(child.enabled)
+                child.update()
+        });
     }
 
     debug() {
