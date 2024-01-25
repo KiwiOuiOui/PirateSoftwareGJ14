@@ -6,15 +6,16 @@ import { Player } from '../objects/Player.js';
 import { ServiceLocator } from '../engine/ServiceLocator.js';
 import { Platform3D } from '../objects/Platform3D';
 import { Stairs } from '../objects/Stairs';
-import { SecondScene } from './SecondScene';
+import { SecondFloor } from './SecondFloor';
 import { Couch } from '../objects/Couch';
 import { WaterDamage } from '../objects/Water';
 import { Button } from '../objects/Button';
 import { Rectangle } from '../engine/maths/Rectangle';
-import spriteSrc from '/assets/sprite.png';
+import uiSpriteSrc from '/assets/uisprite.png';
 import waterMapsData from '/assets/waterMaps.json';
+import { Node } from '../engine/Node';
 
-export class FirstScene extends Scene {
+export class GroundFloor extends Scene {
     initialize() {
         ServiceLocator.error("init Scene ", this.name);
 
@@ -26,48 +27,59 @@ export class FirstScene extends Scene {
         let w = ServiceLocator.context.canvas.width/ServiceLocator.scale;
 
         //border of the game
-        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
-        this.root.addChild(borderleft);
-        let borderright = new Platform("borderright", new Vector(250, 0), new Vector(10, h), 100) //9)
-        this.root.addChild(borderright);
-        let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 100) //9)
-        this.root.addChild(borderup);
-        let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), 100) //9)
-        this.root.addChild(borderdown);
-        let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), 100) //9)
-        this.root.addChild(borderrightATH);
+        let bordersParent = new Node("borders", new Vector(0,0));
+        this.root.addChild(bordersParent);
 
+        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
+        bordersParent.addChild(borderleft);
+        let borderright = new Platform("borderright", new Vector(250, 0), new Vector(10, h), 100) //9)
+        bordersParent.addChild(borderright);
+        let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 100) //9)
+        bordersParent.addChild(borderup);
+        let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), 100) //9)
+        bordersParent.addChild(borderdown);
+        let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), 100) //9)
+        bordersParent.addChild(borderrightATH);
+
+        //game
+        let gameParent = new Node("game node", new Vector(0,0));
+        this.root.addChild(gameParent);
 
         let couch = new Couch("couch on 1st floor", new Vector(180, 40), -1) //9)
-        this.root.addChild(couch);
+        gameParent.addChild(couch);
 
         let stairs = new Stairs("stairs", new Vector(10, 10), new Vector(22, 36), -1) //9)
-        let secondFloor = new SecondScene("second floor");
+        let secondFloor = new SecondFloor("second floor");
         secondFloor.initialize(this);
         stairs.leadsTo(secondFloor);
-        this.root.addChild(stairs);
+        gameParent.addChild(stairs);
 
         let player = new Player("Victor");
         player.position = new Vector(50, 140);
-        this.root.addChild(player);
+        gameParent.addChild(player);
 
         let waterDamage = new WaterDamage("water try", new Vector(10, 10), -1) //9)
         waterDamage.parseData(waterMapsData[0]);
-        this.root.addChild(waterDamage);
+        gameParent.addChild(waterDamage);
 
-        let settingsBtn = new Button("bindsBtn", new Vector(267, 125), "")
-        this.root.addChild(settingsBtn);
+        //ui
+        let ui = new Node("ui", new Vector(0,0));
+        this.root.addChild(ui);
+
+        let settingsBtn = new Button("settingsBtn", new Vector(267, 125), "")
+        ui.addChild(settingsBtn);
 
         let sprite = new Image(320, 180);
-        sprite.src = spriteSrc;
+        sprite.src = uiSpriteSrc;
 
         settingsBtn.sprite = ServiceLocator.graphicManager.create("sprite", settingsBtn, 2);
         settingsBtn.sprite.image = sprite
         settingsBtn.sprite.frame = new Rectangle(new Vector(240,36),new Vector(12*3,12*3));
 
         settingsBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(12*3,12*3));
+
         settingsBtn.onClick = () => {
-            ServiceLocator.clockManager.addTimer(200).action = () => {
+            ServiceLocator.clockManager.addTimer(1).action = () => {
                 ServiceLocator.context.canvas.style.cursor = "auto";
                 ServiceLocator.game.changeScene(ServiceLocator.game._settingsScene);
             };

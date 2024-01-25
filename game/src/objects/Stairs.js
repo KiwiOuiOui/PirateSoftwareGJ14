@@ -2,7 +2,7 @@ import { ServiceLocator } from '../engine/ServiceLocator.js';
 import { Rectangle } from '../engine/maths/Rectangle.js';
 import { Vector } from '../engine/maths/Vector';
 import { Platform } from './Platform';
-import spriteSrc from '/assets/sprite.png';
+import gameSpriteSrc from '/assets/gamesprite.png';
 import { SolidObject } from './SolidObject';
 
 export class Stairs extends SolidObject {
@@ -15,7 +15,7 @@ export class Stairs extends SolidObject {
         //this._graphicCol = ServiceLocator.graphicManager.create("rectangle", this, layer);
         
         let sprite = new Image(320, 180);
-        sprite.src = spriteSrc;
+        sprite.src = gameSpriteSrc;
         this._graphic.image = sprite
         this._graphic.frame = new Rectangle(new Vector(0,144),new Vector(24,36));
         //this._graphic.position = new Vector(-12, -12);

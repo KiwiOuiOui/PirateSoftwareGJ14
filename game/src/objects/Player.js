@@ -4,7 +4,7 @@ import { Vector } from '../engine/maths/Vector.js';
 import { Rectangle } from '../engine/maths/Rectangle.js';
 import { ForceComponent } from '../components/ForceComponent';
 import { Stairs } from './Stairs';
-import spriteSrc from '/assets/sprite.png';
+import gameSpriteSrc from '/assets/gamesprite.png';
 import { SolidObject } from './SolidObject';
 
 export class Player extends Node {
@@ -13,7 +13,7 @@ export class Player extends Node {
 
         this._graphic = ServiceLocator.graphicManager.create("animSprite", this, 2);
         let sprite = new Image(320, 180);
-        sprite.src = spriteSrc;
+        sprite.src = gameSpriteSrc;
         this._graphic.image = sprite
         this._graphic.frame = new Rectangle(new Vector(48,0),new Vector(24,24));
         this._graphic.position = new Vector(-12, -12);

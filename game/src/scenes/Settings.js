@@ -6,16 +6,18 @@ import { Platform } from '../objects/Platform';
 import { Rectangle } from '../engine/maths/Rectangle';
 import { InputBox } from '../objects/InputBox';
 import { Button } from '../objects/Button';
-import spriteSrc from '/assets/sprite.png';
+import uiSpriteSrc from '/assets/uisprite.png';
 
-export class Menu extends Scene {
+export class Settings extends Scene {
     initialize() {
+        ServiceLocator.error("init Scene ", this.name);
+
         let backBtn = new Button("backBtn", new Vector(10, 20), "< RETURN TO GAME")
         this.root.addChild(backBtn);
 
         backBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(100, 10));
         backBtn.onClick = () => {
-            ServiceLocator.clockManager.addTimer(200).action = () => {
+            ServiceLocator.clockManager.addTimer(1).action = () => {
                 ServiceLocator.context.canvas.style.cursor = "auto";
                 ServiceLocator.game.changeScene(this._lastScene);
             };
@@ -99,7 +101,7 @@ export class Menu extends Scene {
 
 
         let sprite = new Image(320, 180);
-        sprite.src = spriteSrc;
+        sprite.src = uiSpriteSrc;
 
         let DPadGraphic = ServiceLocator.graphicManager.create("sprite", this.root, 2);
         DPadGraphic.image = sprite

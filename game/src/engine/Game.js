@@ -1,11 +1,14 @@
 import { ServiceLocator } from './ServiceLocator.js';
-import { FirstScene } from '../scenes/FirstScene.js';
-import { Menu } from '../scenes/menu';
+import { Settings } from '../scenes/Settings';
+import { Home } from '../scenes/Home';
+import { About } from '../scenes/About';
 
 export class Game {
 	constructor() {
 		this._scene = null;
+		this._homeScene = null;
 		this._settingsScene = null;
+		this._aboutScene = null;
 		this.commands = {
 			up : {
                 code : 'KeyW', 
@@ -40,9 +43,11 @@ export class Game {
 		ServiceLocator.initialize(this);
 		ServiceLocator.debugMode = 1;
 		
-		this._settingsScene = new Menu("menu");
+		this._settingsScene = new Settings("Settings scene");
+		this._homeScene = new Home("Settings scene");
+		this._aboutScene = new About("Settings scene");
 
-		this.changeScene(new FirstScene("first floor"));
+		this.changeScene(this._homeScene);
 	}
 	
 	
