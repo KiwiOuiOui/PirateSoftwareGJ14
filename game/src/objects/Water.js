@@ -3,7 +3,7 @@ import { Node } from '../engine/Node';
 import { Rectangle } from '../engine/maths/Rectangle';
 import { Vector } from '../engine/maths/Vector';
 
-const dropletSize = 4;
+export const dropletSize = 4;
 const border = new Vector(10,10);
 
 class WaterDamageMap extends Map {

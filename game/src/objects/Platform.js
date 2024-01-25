@@ -12,7 +12,7 @@ export class Platform extends SolidObject {
         ServiceLocator.componentManager.addCollider(this._collider);
 
         this._graphic.rectangle = new Rectangle(new Vector(0,0), dimension);
-        this._graphic.fill = "red";
+        this._graphic.fill = "black";
         this._graphic.stroke = "transparent";
         this._collider.hitbox = new Rectangle(new Vector(0,0), dimension);
 

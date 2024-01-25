@@ -9,11 +9,13 @@ export class Mop extends Node {
     constructor(name, position, layer = 0) {
         super(name, position);
 
+        this.stock = 0;
+        this.stockMax = 16;
         this._graphic = ServiceLocator.graphicManager.create("circle", this, layer);
         this._collider = ServiceLocator.componentManager.create("CircleCollider", this);
         ServiceLocator.componentManager.addCollider(this._collider);
 
-        this._graphic._circle = new Circle(new Vector(0, 0), 10);
+        this._graphic._circle = new Circle(new Vector(0, 8), 10);
         this._graphic.fill = "yellow";
         this._graphic.stroke = "transparent";
         this._collider.hitbox = this._graphic._circle
@@ -30,8 +32,12 @@ export class Mop extends Node {
         this._defaultOnCollide(collider);
 
         if (collider.node instanceof WaterDrop) {
-            let drop = collider.node;
-            drop.parent.map.remove(drop.x, drop.y);
+            if(this.stockMax > this.stock)
+            {
+                let drop = collider.node;
+                drop.parent.map.remove(drop.x, drop.y);
+                this.stock++;    
+            }
         }
     }
 }

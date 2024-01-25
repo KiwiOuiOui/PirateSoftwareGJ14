@@ -47,10 +47,10 @@ export class GraphicManager {
         // drawing by layer
         this._graphics.forEach((layer) => {
             layer.forEach((graphic) => {
-                if (graphic.enabled &&
+                if (graphic.node.scene &&
+                    graphic.node.scene.drawable &&
                     graphic.node.enabled &&
-                    graphic.node.scene &&
-                    graphic.node.scene.drawable) {
+                    graphic.enabled) {
                     context.scale(ServiceLocator.scale, ServiceLocator.scale);
                     context.translate(graphic.node.globalPosition.x, graphic.node.globalPosition.y);
                     graphic.draw(context);

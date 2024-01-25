@@ -59,18 +59,26 @@ export class PlayerControls extends Component {
                     this.direction.right = 1;
             }
             if (event.code == ServiceLocator.game.commands.a.code) {
-                let mop = new Mop();
-                this.node.addChild(mop);
+                if(!this.mop)
+                {
+                    this.mop = new Mop();
+                    this.node.addChild(this.mop);    
+                }
+
+                this.mop.enable();
                 //mop.position = new Vector(this.node.position.x, this.node.position.y),
 
                 ServiceLocator.clockManager.addTimer(300).action = () => {
-                    mop.disable();
+                    this.mop.disable();
                 };
     
                 // let facing = this.node.facing();
                 // let distance = 50;
                 // let water = new WaterMap("water try", this.node.globalPosition.add(facing.multiply(distance)), -1) //9)
                 // this.node.scene.root.addChild(water);
+            }
+            if (event.code == ServiceLocator.game.commands.b.code) {
+                this.mop.stock = 0;
             }
         }
         if (event.type == "keyup") {

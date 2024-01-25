@@ -65,12 +65,25 @@ export class GroundFloor extends Scene {
         //ui
         let ui = new Node("ui", new Vector(0,0));
         this.root.addChild(ui);
+        let sprite = new Image(320, 180);
+        sprite.src = uiSpriteSrc;
+
+        let commandsNode = new Node("commandes hud");
+        this.root.addChild(commandsNode);
+
+        commandsNode.spritea = ServiceLocator.graphicManager.create("sprite", commandsNode, 3);
+        commandsNode.spritea.image = sprite
+        commandsNode.spritea.frame = new Rectangle(new Vector(156, 48),new Vector(31, 31));
+        commandsNode.spritea.position = new Vector(278, 12);
+        commandsNode.spriteb = ServiceLocator.graphicManager.create("sprite", commandsNode, 2);
+        commandsNode.spriteb.image = sprite
+        commandsNode.spriteb.frame = new Rectangle(new Vector(192, 48),new Vector(31, 31));
+        commandsNode.spriteb.position = new Vector(262, 27);
+
 
         let settingsBtn = new Button("settingsBtn", new Vector(267, 125), "")
         ui.addChild(settingsBtn);
 
-        let sprite = new Image(320, 180);
-        sprite.src = uiSpriteSrc;
 
         settingsBtn.sprite = ServiceLocator.graphicManager.create("sprite", settingsBtn, 2);
         settingsBtn.sprite.image = sprite
