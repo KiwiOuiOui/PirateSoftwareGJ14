@@ -7,6 +7,7 @@ import { Rectangle } from '../engine/maths/Rectangle';
 import { InputBox } from '../objects/InputBox';
 import { Button } from '../objects/Button';
 import uiSpriteSrc from '/assets/uisprite.png';
+import * as Cookies from '../engine/utils/Cookies';
 
 export class Settings extends Scene {
     initialize() {
@@ -31,6 +32,7 @@ export class Settings extends Scene {
                 value : v.key.toUpperCase()
             };
             inputUp._txt.text = ServiceLocator.game.commands.up.value;
+            this.savePrefsInCookies()
         }
         inputUp.hitbox = new Rectangle(new Vector(0,15), new Vector(48, 10));
 
@@ -42,6 +44,7 @@ export class Settings extends Scene {
                 value : v.key.toUpperCase()
             };
             inputLeft._txt.text = ServiceLocator.game.commands.left.value;
+            this.savePrefsInCookies()
         }
         inputLeft.hitbox = new Rectangle(new Vector(15,0), new Vector(12,14));
 
@@ -53,6 +56,7 @@ export class Settings extends Scene {
                 value : v.key.toUpperCase()
             };
             inputRight._txt.text = ServiceLocator.game.commands.right.value;
+            this.savePrefsInCookies()
         }
         inputRight.hitbox = new Rectangle(new Vector(-20,0), new Vector(13, 13));
 
@@ -64,6 +68,7 @@ export class Settings extends Scene {
                 value : v.key.toUpperCase()
             };
             inputDown._txt.text = ServiceLocator.game.commands.down.value;
+            this.savePrefsInCookies()
         }
         inputDown.hitbox = new Rectangle(new Vector(0,-20), new Vector(12,14));
 
@@ -75,6 +80,7 @@ export class Settings extends Scene {
                 value : v.key.toUpperCase()
             };
             inputA._txt.text = ServiceLocator.game.commands.a.value;
+            this.savePrefsInCookies()
         }
         inputA.hitbox = new Rectangle(new Vector(-20,5), new Vector(16,16));
 
@@ -86,6 +92,7 @@ export class Settings extends Scene {
                 value : v.key.toUpperCase()
             };
             inputB._txt.text = ServiceLocator.game.commands.b.value;
+            this.savePrefsInCookies()
         }
         inputB.hitbox = new Rectangle(new Vector(12,-10), new Vector(16,16));
 
@@ -115,5 +122,12 @@ export class Settings extends Scene {
 
 
         this.initialized = true;
+    }
+
+    savePrefsInCookies(){
+        //Cookies.set("WDSoptions", value, Date.now());
+        let date = new Date(Date.now())
+        date.setDate(date.getDate() + 2);
+        Cookies.set("WDSoptions", JSON.stringify(ServiceLocator.game.commands), date);
     }
 }

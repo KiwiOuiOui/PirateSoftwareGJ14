@@ -2,6 +2,7 @@ import { ServiceLocator } from './ServiceLocator.js';
 import { Settings } from '../scenes/Settings';
 import { Home } from '../scenes/Home';
 import { About } from '../scenes/About';
+import * as Cookies from '../engine/utils/Cookies';
 
 export class Game {
 	constructor() {
@@ -9,32 +10,39 @@ export class Game {
 		this._homeScene = null;
 		this._settingsScene = null;
 		this._aboutScene = null;
-		this.commands = {
-			up : {
-                code : 'KeyW', 
-                value : 'W'
-            },
-			down : {
-                code : 'KeyS', 
-                value : 'S'
-            },
-			left : {
-                code : 'KeyA', 
-                value : 'A'
-            },
-			right : {
-                code : 'KeyD', 
-                value : 'D'
-            },
-			a : {
-                code : 'KeyO', 
-                value : 'O'
-            },
-			b : {
-                code : 'KeyK', 
-                value : 'K'
-            }
-		};
+
+		let cookie = Cookies.get("WDSoptions");
+		if(cookie) {
+			this.commands = JSON.parse(cookie)
+		}
+		else {
+			this.commands = {
+				up : {
+					code : 'KeyW', 
+					value : 'W'
+				},
+				down : {
+					code : 'KeyS', 
+					value : 'S'
+				},
+				left : {
+					code : 'KeyA', 
+					value : 'A'
+				},
+				right : {
+					code : 'KeyD', 
+					value : 'D'
+				},
+				a : {
+					code : 'KeyO', 
+					value : 'O'
+				},
+				b : {
+					code : 'KeyK', 
+					value : 'K'
+				}
+			};	
+		}
 	}
 	
 	
