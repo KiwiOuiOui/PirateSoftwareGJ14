@@ -3,6 +3,7 @@ import { Component } from '../engine/components/Component.js';
 import { Vector } from '../engine/maths/Vector';
 import { WaterDamage } from '../objects/Water';
 import { Rectangle } from '../engine/maths/Rectangle';
+import { Mop } from '../objects/Mop';
 
 export class PlayerControls extends Component {
     constructor(node, enabled = true) {
@@ -58,7 +59,14 @@ export class PlayerControls extends Component {
                     this.direction.right = 1;
             }
             if (event.code == ServiceLocator.game.commands.a.code) {
-        
+                let mop = new Mop();
+                this.node.addChild(mop);
+                //mop.position = new Vector(this.node.position.x, this.node.position.y),
+
+                ServiceLocator.clockManager.addTimer(300).action = () => {
+                    mop.disable();
+                };
+    
                 // let facing = this.node.facing();
                 // let distance = 50;
                 // let water = new WaterMap("water try", this.node.globalPosition.add(facing.multiply(distance)), -1) //9)

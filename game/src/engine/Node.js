@@ -32,10 +32,7 @@ export class Node {
 
 
     get scene() {
-        if(this._scene) {
-            return this._scene
-        }
-        return this.parent.scene;
+        return this._scene
     }
 
     get parent() {
@@ -83,6 +80,7 @@ export class Node {
     addChild(child) {
         this._children.push(child);
         child._parent = this;
+        child._scene = this._scene;
     }
 
     removeChild(node) {

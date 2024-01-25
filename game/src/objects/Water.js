@@ -12,14 +12,16 @@ class WaterDamageMap extends Map {
         for (let i = 0; i < 240/dropletSize; i++) {
             this.set(i, new Map());
         }
-        this.count = 0;
     }
 
     get(x, y = null) {
+        let row = super.get(x);
+
         if(null == y)
-            return super.get(x);
-        else 
-            return super.get(x)?.get(y);
+            return row;
+        else if(undefined != row) {
+            return super.get(x).get(y);
+        }
     }
     set(x, y, v = null) {
         if(null == v)
@@ -31,15 +33,13 @@ class WaterDamageMap extends Map {
         v.coords = {x:x, y:y};
         v.map = this;
         this.set(x, y, v);
-        this.count++;
     }
     remove(x, y) {
         let node = this.get(x, y);
-        if(node == node.parent.dropletSrc) {
-            node.parent.dropletSrc = undefined;
+        if(node == node.parent.source) {
+            node.parent.source.disable();
         }
-        this.set(x, y, undefined);
-        this.count--;
+        node.disable();
     }
     postocoord(v) {
         return v.multiply(1/dropletSize);
@@ -49,7 +49,7 @@ class WaterDamageMap extends Map {
     }
 }
 
-class WaterDrop extends Node {
+export class WaterDrop extends Node {
     constructor(name, position, layer = -10) {
         super(name, position);
 
@@ -65,9 +65,9 @@ class WaterDrop extends Node {
 
         //ServiceLocator.error("WaterSystem create WaterDroplet... ", this)
 
-        // this._collider = ServiceLocator.componentManager.create("RectangleCollider", this);
-        // ServiceLocator.componentManager.addCollider(this._collider);
-        // this._collider.hitbox = new Rectangle(new Vector(0,0), new Vector(dropletSize, dropletSize));
+        this._collider = ServiceLocator.componentManager.create("RectangleCollider", this);
+        ServiceLocator.componentManager.addCollider(this._collider);
+        this._collider.hitbox = new Rectangle(new Vector(0,0), new Vector(dropletSize, dropletSize));
 
         this._graphic = ServiceLocator.graphicManager.create("rectangle", this, layer);
         
@@ -96,6 +96,11 @@ export class WaterDamage extends Node {
     }
     
     parseData(data){
+        if(null == this._scene) {
+            ServiceLocator.error("WaterDamage to be added to scene before parsing");
+            return;
+        }
+
         data.forEach(e => {
             let drop = new WaterDrop("drop", new Vector(e.x*dropletSize, e.y*dropletSize), this.layer)
             drop.x = e.x;
@@ -103,20 +108,17 @@ export class WaterDamage extends Node {
             this.dimension.width = Math.max(this.dimension.width, e.x+1);
             this.dimension.height = Math.max(this.dimension.height, e.y+1);
             drop.prio = e.prio;
-            drop._graphic.fill = "rgb("+drop.prio+" "+drop.prio+" "+drop.prio+")";
+            drop._graphic.fill = "rgb("+drop.prio+" "+drop.prio+" "+255+")";
             if(e.source) {
                 this.source = drop;
-                //console.error("source", drop);
                 drop.enable();
             }
             else {
                 drop.disable();
             }
             this.addChild(drop);
-            //console.error("setting drop in map ["+drop.x+"]["+drop.y+"]",drop, e)
             this.map.set(drop.x,drop.y,drop);
         });
-        //console.error(this.dimension);
         this.setNeighbours();
         this.resetHeatMap();
     }
@@ -202,7 +204,6 @@ export class WaterDamage extends Node {
     }
 
     spread(){
-        
         let spreadPotential = [];
 
         let actualPrio = this.calculatePrio(this.source);
@@ -212,7 +213,7 @@ export class WaterDamage extends Node {
             {
                 let tmp = this.heatMap.get(x,y);
 
-                if(tmp == actualPrio){
+                if(tmp >= actualPrio){
                     spreadPotential.push({x:x,y:y});
                 }
             }
@@ -226,7 +227,7 @@ export class WaterDamage extends Node {
     }
 
     onUpdate() {
-        if(false == this.spreadTimer) {
+        if(false == this.spreadTimer && this.source.enabled) {
             this.spreadTimer = ServiceLocator.clockManager.addTimer(100).action = () => {
                 this.spread()
                 this.spreadTimer = false;

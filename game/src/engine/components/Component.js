@@ -11,7 +11,6 @@ export class Component {
     enable() {
         this._enabled = true;
         this._onEnable();
-
     }
 
 
