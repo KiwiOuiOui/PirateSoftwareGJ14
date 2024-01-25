@@ -96,8 +96,6 @@ export class WaterDamage extends Node {
     }
     
     parseData(data){
-        //console.error("parsing ", data)
-
         data.forEach(e => {
             let drop = new WaterDrop("drop", new Vector(e.x*dropletSize, e.y*dropletSize), this.layer)
             drop.x = e.x;
@@ -105,7 +103,7 @@ export class WaterDamage extends Node {
             this.dimension.width = Math.max(this.dimension.width, e.x+1);
             this.dimension.height = Math.max(this.dimension.height, e.y+1);
             drop.prio = e.prio;
-            drop._graphic.fill = "white";//"rgb("+drop.prio+" "+drop.prio+" "+drop.prio+")";
+            drop._graphic.fill = "rgb("+drop.prio+" "+drop.prio+" "+drop.prio+")";
             if(e.source) {
                 this.source = drop;
                 //console.error("source", drop);
@@ -151,19 +149,16 @@ export class WaterDamage extends Node {
     calculatePrio(drop) {
         let prioRet = -1; // unrealistic value so it will always be overwritten
         this.heatMap.set(drop.x, drop.y, 1);
-        ServiceLocator.error("calculatePrio of ", drop.x, drop.y, drop, this.heatMap);
         
         if(drop.left && -1 == this.heatMap.get(drop.left.x, drop.left.y))
         {
             if(drop.left.enabled)
             {
-                ServiceLocator.error("calculatePrio of left", drop.x, drop.y);
                 prioRet = Math.max(prioRet, this.calculatePrio(drop.left));
             }
             else
             {
                 prioRet = Math.max(prioRet, drop.left.prio)
-                ServiceLocator.error("register left in heatmap", drop.x, drop.y);
                 this.heatMap.set(drop.x-1, drop.y, drop.left.prio);
             }
         }
@@ -171,13 +166,11 @@ export class WaterDamage extends Node {
         {
             if(drop.right.enabled)
             {
-                ServiceLocator.error("calculatePrio of right", drop.x, drop.y);
                 prioRet = Math.max(prioRet, this.calculatePrio(drop.right));
             }
             else
             {
                 prioRet = Math.max(prioRet, drop.right.prio)
-                ServiceLocator.error("register right in heatmap", drop.x, drop.y);
                 this.heatMap.set(drop.x+1, drop.y, drop.right.prio);
             }
         }
@@ -185,13 +178,11 @@ export class WaterDamage extends Node {
         {
             if(drop.up.enabled)
             {
-                ServiceLocator.error("calculatePrio of up", drop.x, drop.y);
                 prioRet = Math.max(prioRet, this.calculatePrio(drop.up));
             }
             else
             {
                 prioRet = Math.max(prioRet, drop.up.prio)
-                ServiceLocator.error("register up in heatmap", drop.x, drop.y);
                 this.heatMap.set(drop.x, drop.y-1, drop.up.prio);
             }
         }
@@ -199,13 +190,11 @@ export class WaterDamage extends Node {
         {
             if(drop.down.enabled)
             {
-                ServiceLocator.error("calculatePrio of down", drop.x, drop.y);
                 prioRet = Math.max(prioRet, this.calculatePrio(drop.down));
             }
             else
             {
                 prioRet = Math.max(prioRet, drop.down.prio)
-                ServiceLocator.error("register down in heatmap", drop.x, drop.y);
                 this.heatMap.set(drop.x, drop.y+1, drop.down.prio);
             }
         }
@@ -231,12 +220,9 @@ export class WaterDamage extends Node {
 
         let a = Math.floor(Math.random()*spreadPotential.length);
         let dropToSpread = spreadPotential[a];
-        ServiceLocator.error("spreadPotential", spreadPotential, actualPrio);
-        //ServiceLocator.error("calculatePrio spread to", dropToSpread.x, dropToSpread.y);
 
         this.map.get(dropToSpread.x, dropToSpread.y).enable();
         this.resetHeatMap();
-        //ServiceLocator.error("\n");
     }
 
     onUpdate() {

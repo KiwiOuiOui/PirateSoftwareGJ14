@@ -12,6 +12,7 @@ import { WaterDamage } from '../objects/Water';
 import { Button } from '../objects/Button';
 import { Rectangle } from '../engine/maths/Rectangle';
 import spriteSrc from '/assets/sprite.png';
+import waterMapsData from '/assets/waterMaps.json';
 
 export class FirstScene extends Scene {
     initialize() {
@@ -50,7 +51,9 @@ export class FirstScene extends Scene {
         player.position = new Vector(50, 140);
         this.root.addChild(player);
 
-
+        let waterDamage = new WaterDamage("water try", new Vector(10, 10), -1) //9)
+        waterDamage.parseData(waterMapsData[0]);
+        this.root.addChild(waterDamage);
 
         let settingsBtn = new Button("bindsBtn", new Vector(267, 125), "")
         this.root.addChild(settingsBtn);

@@ -3,7 +3,6 @@ import { Component } from '../engine/components/Component.js';
 import { Vector } from '../engine/maths/Vector';
 import { WaterDamage } from '../objects/Water';
 import { Rectangle } from '../engine/maths/Rectangle';
-import waterMapsData from '/assets/waterMaps.json';
 
 export class PlayerControls extends Component {
     constructor(node, enabled = true) {
@@ -59,9 +58,6 @@ export class PlayerControls extends Component {
                     this.direction.right = 1;
             }
             if (event.code == ServiceLocator.game.commands.a.code) {
-                let waterDamage = new WaterDamage("water try", new Vector(10, 10), -1) //9)
-                waterDamage.parseData(waterMapsData[0]);
-                this.node.scene.root.addChild(waterDamage);
         
                 // let facing = this.node.facing();
                 // let distance = 50;

@@ -20,28 +20,31 @@
         body.appendChild(canvas);
 
         let ctx = canvas.getContext("2d");
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
 
-        ctx.drawImage(img, 0, 0, frame.height, frame.width,0, 0, frame.height, frame.width);
-        let data = ctx.getImageData(0, 0, frame.height, frame.width).data;
+        ctx.drawImage(img, 0, 0, frame.width, frame.height,0, 0, frame.width, frame.height);
         let formatted = [];
         for (let x = 0; x < frame.width; x++) {
             for (let y = 0; y < frame.height; y++) {
-                let coord = x + frame.height*y;
+                let data = ctx.getImageData(x, y, 1, 1).data;
                 let drop = {
                     x : x,
                     y : y,
                     prio : 0,
                     source : false
                 }
-                drop.prio = Math.min(data[coord*4], data[coord*4+3]);
-
+                drop.prio = Math.min(data[0], data[3]);
+                // console.log(drop)
+                // console.log(data)
                 if(null == this.source &&
-                    255 == data[coord*4] &&
-                    0 == data[coord*4 +1] &&
-                    0 == data[coord*4 +2])
+                    255 == data[0] &&
+                    0 == data[1] &&
+                    0 == data[2])
                 {
                     drop.source = true;
-                    console.error(x, y, coord, data[coord*4], data[coord*4+3])
+                    console.error(x, y, data[0], data[3])
                 }
                 formatted.push(drop);
             }                
@@ -54,6 +57,9 @@
     <style>
         img {
             display : none;
+        }
+        canvas {
+            height: 400px;
         }
     </style>
 </body>
