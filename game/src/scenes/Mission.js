@@ -8,9 +8,8 @@ import uiSpriteSrc from '/assets/uisprite.png';
 import { Node } from '../engine/Node';
 import { Platform } from '../objects/Platform';
 import { GroundFloor } from './GroundFloor';
-import { Mission } from './Mission';
 
-export class Home extends Scene {
+export class Mission extends Scene {
     initialize() {
         ServiceLocator.error("init Scene ", this.name);
 
@@ -39,19 +38,36 @@ export class Home extends Scene {
         let uileft = new Node("ui left", new Vector(0,0));
         this.root.addChild(uileft);
 
-        let launchGameBtn = new Button("launchGameBtn", new Vector(94, 78), "")
+        let launchGameBtn = new Button("launchGameBtn", new Vector(94, 53), "ACCEPT")
         uileft.addChild(launchGameBtn);
 
         let sprite = new Image(320, 180);
         sprite.src = uiSpriteSrc;
 
-        launchGameBtn.sprite = ServiceLocator.graphicManager.create("sprite", launchGameBtn, 2);
-        launchGameBtn.sprite.image = sprite
-        launchGameBtn.sprite.frame = new Rectangle(new Vector(240, 72),new Vector(72,24));
+        // launchGameBtn.sprite = ServiceLocator.graphicManager.create("sprite", launchGameBtn, 2);
+        // launchGameBtn.sprite.image = sprite
+        // launchGameBtn.sprite.frame = new Rectangle(new Vector(240, 72),new Vector(72,24));
 
         launchGameBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(72,24));
         
         launchGameBtn.onClick = () => {
+            ServiceLocator.clockManager.addTimer(1).action = () => {
+                ServiceLocator.context.canvas.style.cursor = "auto";
+                ServiceLocator.game.changeScene(new GroundFloor("first floor"));
+            };
+        }
+
+        
+        let newMissionBtn = new Button("newMissionBtn", new Vector(94, 103), "NEW MISSION")
+        uileft.addChild(newMissionBtn);
+
+        // newMissionBtn.sprite = ServiceLocator.graphicManager.create("sprite", newMissionBtn, 2);
+        // newMissionBtn.sprite.image = sprite
+        // newMissionBtn.sprite.frame = new Rectangle(new Vector(240, 72),new Vector(72,24));
+
+        newMissionBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(72,24));
+        
+        newMissionBtn.onClick = () => {
             ServiceLocator.clockManager.addTimer(1).action = () => {
                 ServiceLocator.context.canvas.style.cursor = "auto";
                 ServiceLocator.game.changeScene(new Mission("mission"));
