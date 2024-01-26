@@ -62,7 +62,7 @@ export class About extends Scene {
         let aboutTextNode = new Node("aboutTextNode", new Vector(14,52));
         uileft.addChild(aboutTextNode);
         let aboutTextComp = ServiceLocator.graphicManager.create("text", aboutTextNode, 2);
-        aboutTextComp.text = "This game was made in 14 days during \nthe 14th PirateSoftware Game Jam \naround the theme \"This is Spreading\".\n\n\nYou are somewhere between \na firefighter and a plumber, \nyou have to blot the floor quickly \nand then find the cause of this disaster.\n\nYou might need to go to the setting \npage to setup your key binds for now... \n\n\nTHANKS FOR PLAYING ANDHAVE FUN!!".toUpperCase();
+        aboutTextComp.text = "This game was made in 14 days during \nthe 14th PirateSoftware Game Jam \naround the theme \"This is Spreading\".\n\n\nYou are somewhere between \na firefighter and a plumber, you have  \nto blot the floor quickly to save \nfurnitures, then find the cause of \nthis disaster.\n\nYou might need to go to the setting \npage to setup your key binds for now... \n\n\nTHANKS FOR PLAYING, HAVE FUN!!".toUpperCase();
         aboutTextComp.color = "#c2303a";
         aboutTextComp.size = 6;
 
