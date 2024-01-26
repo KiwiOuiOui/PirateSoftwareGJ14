@@ -62,7 +62,7 @@ export class PlayerControls extends Component {
                 if(!this.mop)
                 {
                     this.mop = new Mop();
-                    this.node.addChild(this.mop);    
+                    this.node.addChild(this.mop);
                 }
 
                 this.mop.enable();

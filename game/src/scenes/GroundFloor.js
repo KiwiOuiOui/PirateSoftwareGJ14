@@ -71,7 +71,7 @@ export class GroundFloor extends Scene {
         let commandsNode = new Node("commandes hud");
         this.root.addChild(commandsNode);
 
-        commandsNode.spritea = ServiceLocator.graphicManager.create("sprite", commandsNode, 3);
+        this.bucketSprite = commandsNode.spritea = ServiceLocator.graphicManager.create("sprite", commandsNode, 3);
         commandsNode.spritea.image = sprite
         commandsNode.spritea.frame = new Rectangle(new Vector(60, 0),new Vector(31, 31));
         commandsNode.spritea.position = new Vector(278, 12);
