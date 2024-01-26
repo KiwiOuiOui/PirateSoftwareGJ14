@@ -42,7 +42,10 @@ class WaterDamageMap extends Map {
         node.disable();
     }
     postocoord(v) {
-        return v.multiply(1/dropletSize);
+        let r = v.multiply(1/dropletSize);
+        r.x = Math.floor(r.x);
+        r.y = Math.floor(r.y);
+        return r;
     }
     coordtopost(v) {
         return v.multiply(dropletSize);
@@ -201,10 +204,23 @@ export class WaterDamage extends Node {
         return prioRet;
     }
 
-    spread(){
+    spread(vector = null){
         let spreadPotential = [];
+        let nodeFrom = this.source;
 
-        let actualPrio = this.calculatePrio(this.source);
+        if(null != vector)
+        {
+            let nodeCoord = this.map.postocoord(vector);
+            nodeFrom = this.map.get(nodeCoord.x, nodeCoord.y);
+        }
+        
+        if(!nodeFrom.enabled)
+        {
+            nodeFrom.enable();
+            return;
+        }
+
+        let actualPrio = this.calculatePrio(nodeFrom);
         for (let x = 0; x < this.dimension.width; x++)
         {
             for (let y = 0; y < this.dimension.height; y++)

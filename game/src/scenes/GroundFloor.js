@@ -102,9 +102,9 @@ export class GroundFloor extends Scene {
         player.position = new Vector(50, 140);
         gameParent.addChild(player);
 
-        let waterDamage = new WaterDamage("water try", new Vector(10, 10), 1) //9)
-        gameParent.addChild(waterDamage);
-        waterDamage.parseData(waterMapsData[0]);
+        this.waterDamage = new WaterDamage("water try", new Vector(10, 10), 1) //9)
+        gameParent.addChild(this.waterDamage);
+        this.waterDamage.parseData(waterMapsData[0]);
 
         //ui
         let ui = new Node("ui", new Vector(0,0));

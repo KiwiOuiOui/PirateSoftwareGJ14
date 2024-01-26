@@ -79,6 +79,9 @@ export class PlayerControls extends Component {
             }
             if (event.code == ServiceLocator.game.commands.a.code) {
                 if(this.mop) {
+                    for (let i = 0; i < this.mop.stock; i++) {
+                        this.node.scene.waterDamage.spread(this.node.globalPosition)
+                    }
                     this.mop.stock = 0;
                     this.mop.calculateSprite();
                 }
