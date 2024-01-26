@@ -9,6 +9,7 @@ export class Text extends Graphic {
         this._font = "sans-serif"
         this._color = "black";
         this._size = 10;
+        this._lines = [];
     }
 
 
@@ -16,7 +17,9 @@ export class Text extends Graphic {
         context.textBaseline = "top";
         context.fillStyle = this._color;
         context.font = this._size + "px " + this._font;
-        context.fillText(this._text, 0, 0);
+
+        for (var i = 0; i<this._lines.length; i++)
+            context.fillText(this._lines[i], 0, i*(this._size+1));
     }
 
 
@@ -26,6 +29,7 @@ export class Text extends Graphic {
 
     set text(value) {
         this._text = value;
+        this._lines = this._text.split('\n');;
     }
 
     get text() {

@@ -124,8 +124,6 @@ export class WaterDamage extends Node {
     }
 
     setNeighbours() {
-        console.log("setNeighbours map",this.map)
-
         for (let x = 0; x < this.dimension.width; x++) {
             for (let y = 0; y < this.dimension.height; y++) {
                 let drop = this.map.get(x,y);

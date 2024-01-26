@@ -58,7 +58,7 @@ export class PlayerControls extends Component {
                 } else
                     this.direction.right = 1;
             }
-            if (event.code == ServiceLocator.game.commands.a.code) {
+            if (event.code == ServiceLocator.game.commands.b.code) {
                 if(!this.mop)
                 {
                     this.mop = new Mop();
@@ -77,7 +77,7 @@ export class PlayerControls extends Component {
                 // let water = new WaterMap("water try", this.node.globalPosition.add(facing.multiply(distance)), -1) //9)
                 // this.node.scene.root.addChild(water);
             }
-            if (event.code == ServiceLocator.game.commands.b.code) {
+            if (event.code == ServiceLocator.game.commands.a.code) {
                 if(this.mop) {
                     this.mop.stock = 0;
                 }

@@ -57,7 +57,6 @@ export class Mission extends Scene {
                 ServiceLocator.game.changeScene(ServiceLocator.game._homeScene);
             };
         }
-        
 
         let backGraphic = ServiceLocator.graphicManager.create("sprite", backBtn, 2);
         backGraphic.image = sprite
@@ -81,6 +80,23 @@ export class Mission extends Scene {
         newMissionGraphic.frame = new Rectangle(new Vector(120,12),new Vector(24,24));
         newMissionGraphic.position = new Vector(0, 0);
         
+        //mission infos
+        let insurance = 2500+Math.floor(50*Math.random())*100
+        let insuranceNode = new Node("ui right", new Vector(170,50));
+        this.root.addChild(insuranceNode);
+        let insuranceInfo = ServiceLocator.graphicManager.create("text", insuranceNode, 2);
+        insuranceInfo.text = "INSURANCE COVERAGE :\n" + insurance + "$";
+        insuranceInfo.color = "red";
+        insuranceInfo.size = 10;
+
+        let objToSaveNode = new Node("ui right", new Vector(170,80));
+        this.root.addChild(objToSaveNode);
+        let objToSaveInfo = ServiceLocator.graphicManager.create("text", objToSaveNode, 2);
+        objToSaveInfo.text = "YOU NEED TO ESPECIALLY\nSAVE THOSE FURNITURES :\n X         X         X";
+        objToSaveInfo.color = "red";
+        objToSaveInfo.size = 10;
+
+
         //launch game
         let launchGameBtn = new Button("launchGameBtn", new Vector(180, 130), "")
         this.root.addChild(launchGameBtn);

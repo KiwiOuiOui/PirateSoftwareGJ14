@@ -72,18 +72,38 @@ export class About extends Scene {
         let asepritePicto = ServiceLocator.graphicManager.create("sprite", uiright, 0);
         asepritePicto.image = sprite;
         asepritePicto.frame = new Rectangle(new Vector(108,36),new Vector(36, 36));
-        asepritePicto.position = new Vector(175, 45);
+        asepritePicto.position = new Vector(170, 45);
+
+        let asepriteTextNode = new Node("ui right", new Vector(210,52));
+        uiright.addChild(asepriteTextNode);
+        let asepriteTextComp = ServiceLocator.graphicManager.create("text", asepriteTextNode, 2);
+        asepriteTextComp.text = "as im learning pixel art,\nAseprite was a great \nsoftware to use, try it.".toUpperCase();
+        asepriteTextComp.color = "#c2303a";
+        asepriteTextComp.size = 7;
 
         let deepnightPicto = ServiceLocator.graphicManager.create("sprite", uiright, 0);
         deepnightPicto.image = sprite;
         deepnightPicto.frame = new Rectangle(new Vector(108,72),new Vector(36, 36));
-        deepnightPicto.position = new Vector(175, 85);
+        deepnightPicto.position = new Vector(170, 85);
+
+        let deepnightTextNode = new Node("ui right", new Vector(210,88));
+        uiright.addChild(deepnightTextNode);
+        let deepnightTextComp = ServiceLocator.graphicManager.create("text", deepnightTextNode, 2);
+        deepnightTextComp.text = "i learned to make games\nthanks to Sebastien\n'Deepnight' BENARD,\ngo check out his work!".toUpperCase();
+        deepnightTextComp.color = "#c2303a";
+        deepnightTextComp.size = 7;
 
         let friendshipPicto = ServiceLocator.graphicManager.create("sprite", uiright, 0);
         friendshipPicto.image = sprite;
         friendshipPicto.frame = new Rectangle(new Vector(108,108),new Vector(36, 36));
-        friendshipPicto.position = new Vector(175, 125);
+        friendshipPicto.position = new Vector(170, 125);
 
+        let friendshipTextNode = new Node("ui right", new Vector(210,128));
+        uiright.addChild(friendshipTextNode);
+        let friendshipTextComp = ServiceLocator.graphicManager.create("text", friendshipTextNode, 2);
+        friendshipTextComp.text = "Special thanks\nto my friend who tested\nthis game when it was\nabsolutely unplayable.".toUpperCase();
+        friendshipTextComp.color = "#c2303a";
+        friendshipTextComp.size = 7;
 
         this.initialized = true;
     }
