@@ -24,15 +24,15 @@ export class Mission extends Scene {
         //border of the game
         let bordersParent = new Node("borders", new Vector(0,0));
         this.root.addChild(bordersParent);
-        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
+        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 5) //9)
         bordersParent.addChild(borderleft);
-        let borderright = new Platform("borderright", new Vector(155, 0), new Vector(10, h), 100) //9)
+        let borderright = new Platform("borderright", new Vector(155, 0), new Vector(10, h), 5) //9)
         bordersParent.addChild(borderright);
-        let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 100) //9)
+        let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 5) //9)
         bordersParent.addChild(borderup);
-        let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), 100) //9)
+        let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), 5) //9)
         bordersParent.addChild(borderdown);
-        let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), 100) //9)
+        let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), 5) //9)
         bordersParent.addChild(borderrightATH);
 
         let sprite = new Image(320, 180);

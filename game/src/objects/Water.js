@@ -85,14 +85,14 @@ export class WaterDrop extends Node {
 export class WaterDamage extends Node {
     constructor(name, position, layer = -10) {
         super(name, position);
-
+        this.layer = layer;
         this.source = null;
         this.imgSrc = null;
         this.imgData = null;
         this.dimension = new Rectangle(new Vector(0,0),new Vector(0,0));
         this.map = new WaterDamageMap();
         this.heatMap = new WaterDamageMap();
-        this.spreadTimer = false;
+        this.spreadCD = false;
     }
     
     parseData(data){
@@ -225,10 +225,10 @@ export class WaterDamage extends Node {
     }
 
     onUpdate() {
-        if(false == this.spreadTimer && this.source.enabled) {
-            this.spreadTimer = ServiceLocator.clockManager.addTimer(100).action = () => {
+        if(false == this.spreadCD && this.source.enabled) {
+            this.spreadCD = ServiceLocator.clockManager.addTimer(200).action = () => {
                 this.spread()
-                this.spreadTimer = false;
+                this.spreadCD = false;
             };
         }
     }

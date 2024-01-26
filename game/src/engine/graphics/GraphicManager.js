@@ -7,6 +7,7 @@ import { palettes } from './ColorPalettes.js';
 export class GraphicManager {
     constructor() {
         this._graphics = new Map();
+        this._layerKeys = [];
         this._palette = palettes.find((p) => p.name == "icecream");
         this._spectrum = Manip.createSharpSpectrum(this._palette.colors);
     }
@@ -45,7 +46,8 @@ export class GraphicManager {
         //     }
         // }
         // drawing by layer
-        this._graphics.forEach((layer) => {
+        this._layerKeys.forEach((layerKey) => {
+            let layer = this._graphics.get(layerKey);
             layer.forEach((graphic) => {
                 if (graphic.node.scene &&
                     graphic.node.scene.drawable &&
@@ -84,6 +86,8 @@ export class GraphicManager {
     addGraphic(graphic, layer) {
         graphic.layer = layer;
         if (!this._graphics.has(layer)) {
+            this._layerKeys.push(layer);
+            this._layerKeys.sort((a, b) => (a-b));
             this._graphics.set(layer, []);
             this._graphics = new Map([...this._graphics.entries()].sort());
         }

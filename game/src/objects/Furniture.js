@@ -11,10 +11,13 @@ export class Furniture extends SolidObject {
 
         this.baseValue = baseValue;
         this.drops = [];
+        
         this._collider = ServiceLocator.componentManager.create("RectangleCollider", this);
-        this._graphic = ServiceLocator.graphicManager.create("animSprite", this, 2);
-        // this._graphicCol = ServiceLocator.graphicManager.create("rectangle", this, layer);
         ServiceLocator.componentManager.addCollider(this._collider);
+
+        this._graphic = ServiceLocator.graphicManager.create("animSprite", this, layer);
+        
+        // this._graphicCol = ServiceLocator.graphicManager.create("rectangle", this, layer);
 
         // this._graphicCol.rectangle = rectCollider;
         // this._graphicCol.fill = "red";

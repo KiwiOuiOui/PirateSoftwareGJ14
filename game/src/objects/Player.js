@@ -11,7 +11,7 @@ export class Player extends Node {
     constructor(name, position) {
         super(name, position);
 
-        this._graphic = ServiceLocator.graphicManager.create("animSprite", this, 2);
+        this._graphic = ServiceLocator.graphicManager.create("animSprite", this, 101);
         let sprite = new Image(320, 180);
         sprite.src = gameSpriteSrc;
         this._graphic.image = sprite

@@ -14,6 +14,11 @@ import { Rectangle } from '../engine/maths/Rectangle';
 import uiSpriteSrc from '/assets/uisprite.png';
 import waterMapsData from '/assets/waterMaps.json';
 import { Node } from '../engine/Node';
+import { Sink } from '../objects/Sink';
+import { FishTank } from '../objects/FishTank';
+import { TV } from '../objects/TV';
+
+const wallLayer = 2;
 
 export class GroundFloor extends Scene {
     initialize() {
@@ -23,6 +28,14 @@ export class GroundFloor extends Scene {
         //let debug = new Debug("debug");
         //this.root.addChild(debug);
 
+        let bg = ServiceLocator.graphicManager.create("rectangle", this.root, 0);
+        bg.rectangle = new Rectangle(
+            new Vector(10,10),
+            new Vector(240, 160)
+        );
+        bg.fill = "#4f3f3d";
+        bg.stroke = "transparent";
+
         let h = ServiceLocator.context.canvas.height/ServiceLocator.scale;
         let w = ServiceLocator.context.canvas.width/ServiceLocator.scale;
 
@@ -30,25 +43,56 @@ export class GroundFloor extends Scene {
         let bordersParent = new Node("borders", new Vector(0,0));
         this.root.addChild(bordersParent);
 
-        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
+        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), wallLayer) //9)
         bordersParent.addChild(borderleft);
-        let borderright = new Platform("borderright", new Vector(250, 0), new Vector(10, h), 100) //9)
+        let borderright = new Platform("borderright", new Vector(250, 0), new Vector(10, h), wallLayer) //9)
         bordersParent.addChild(borderright);
-        let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 100) //9)
+        let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), wallLayer) //9)
         bordersParent.addChild(borderup);
-        let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), 100) //9)
+        let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), wallLayer) //9)
         bordersParent.addChild(borderdown);
-        let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), 100) //9)
+        let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), wallLayer) //9)
         bordersParent.addChild(borderrightATH);
 
         //game
         let gameParent = new Node("game node", new Vector(0,0));
         this.root.addChild(gameParent);
 
-        let couch = new Couch("couch on 1st floor", new Vector(180, 40), -1) //9)
-        gameParent.addChild(couch);
+        //room 1
+        let room1wall1 = new Platform("room1wall1", new Vector(0, 100), new Vector(80, 10), wallLayer) //9)
+        gameParent.addChild(room1wall1);
+        let room1wall2 = new Platform("room1wall2", new Vector(80, 100), new Vector(10, 20), wallLayer) //9)
+        gameParent.addChild(room1wall2);
+        let room1wall3 = new Platform("room1wall3", new Vector(80, 140), new Vector(10, 40), wallLayer) //9)
+        gameParent.addChild(room1wall3);
 
-        let stairs = new Stairs("stairs", new Vector(10, 10), new Vector(22, 36), -1) //9)
+        //room 2
+        let room2wall1 = new Platform("room2wall1", new Vector(150, 100), new Vector(50, 10), wallLayer) //9)
+        gameParent.addChild(room2wall1);
+        let room2wall2 = new Platform("room2wall2", new Vector(150, 100), new Vector(10, 80), wallLayer) //9)
+        gameParent.addChild(room2wall2);
+        let room2wall3 = new Platform("room2wall3", new Vector(220, 100), new Vector(40, 10), wallLayer) //9)
+        gameParent.addChild(room2wall3);
+        let tv = new TV("TV on 1st floor", new Vector(170, 110), 3) //9)
+        gameParent.addChild(tv);
+
+        //room 3
+        let room3wall1 = new Platform("room3wall1", new Vector(150, 70), new Vector(50, 10), wallLayer) //9)
+        gameParent.addChild(room3wall1);
+        let room3wall2 = new Platform("room3wall2", new Vector(150, 10), new Vector(10, 70), wallLayer) //9)
+        gameParent.addChild(room3wall2);
+        let room3wall3 = new Platform("room3wall3", new Vector(220, 70), new Vector(40, 10), wallLayer) //9)
+        gameParent.addChild(room3wall3);
+        let sink = new Sink("sink on 1st floor", new Vector(180, 10), 3) //9)
+        gameParent.addChild(sink);
+
+
+        let couch = new Couch("couch on 1st floor", new Vector(60, 10), 3) //9)
+        gameParent.addChild(couch);
+        let fishtank = new FishTank("FishTank on 1st floor", new Vector(120, 10), 3) //9)
+        gameParent.addChild(fishtank);
+
+        let stairs = new Stairs("stairs", new Vector(10, 10), new Vector(22, 36), 3) //9)
         let secondFloor = new SecondFloor("second floor");
         secondFloor.initialize(this);
         stairs.leadsTo(secondFloor);
@@ -58,7 +102,7 @@ export class GroundFloor extends Scene {
         player.position = new Vector(50, 140);
         gameParent.addChild(player);
 
-        let waterDamage = new WaterDamage("water try", new Vector(10, 10), -1) //9)
+        let waterDamage = new WaterDamage("water try", new Vector(10, 10), 1) //9)
         gameParent.addChild(waterDamage);
         waterDamage.parseData(waterMapsData[0]);
 

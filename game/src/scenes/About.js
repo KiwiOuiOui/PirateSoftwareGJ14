@@ -38,15 +38,15 @@ export class About extends Scene {
         //border of the game
         let bordersParent = new Node("borders", new Vector(0,0));
         this.root.addChild(bordersParent);
-        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
+        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 3) //9)
         bordersParent.addChild(borderleft);
-        let borderright = new Platform("borderright", new Vector(155, 0), new Vector(10, h), 100) //9)
+        let borderright = new Platform("borderright", new Vector(155, 0), new Vector(10, h), 3) //9)
         bordersParent.addChild(borderright);
-        let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 100) //9)
+        let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 3) //9)
         bordersParent.addChild(borderup);
-        let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), 100) //9)
+        let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), 3) //9)
         bordersParent.addChild(borderdown);
-        let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), 100) //9)
+        let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), 3) //9)
         bordersParent.addChild(borderrightATH);
 
         //uileft
@@ -58,6 +58,13 @@ export class About extends Scene {
         aboutTitle.image = sprite;
         aboutTitle.frame = new Rectangle(new Vector(240,96),new Vector(48,12));
         aboutTitle.position = new Vector(70, 20);
+
+        let aboutTextNode = new Node("aboutTextNode", new Vector(14,52));
+        uileft.addChild(aboutTextNode);
+        let aboutTextComp = ServiceLocator.graphicManager.create("text", aboutTextNode, 2);
+        aboutTextComp.text = "This game was made in 14 days during \nthe 14th PirateSoftware Game Jam \naround the theme \"This is Spreading\".\n\n\nYou are somewhere between \na firefighter and a plumber, \nyou have to blot the floor quickly \nand then find the cause of this disaster.\n\nYou might need to go to the setting \npage to setup your key binds for now... \n\n\nTHANKS FOR PLAYING ANDHAVE FUN!!".toUpperCase();
+        aboutTextComp.color = "#c2303a";
+        aboutTextComp.size = 6;
 
         //uiright
         let uiright = new Node("ui right", new Vector(0,0));
@@ -74,36 +81,36 @@ export class About extends Scene {
         asepritePicto.frame = new Rectangle(new Vector(108,36),new Vector(36, 36));
         asepritePicto.position = new Vector(170, 45);
 
-        let asepriteTextNode = new Node("ui right", new Vector(210,52));
+        let asepriteTextNode = new Node("asepriteTextNode", new Vector(210,52));
         uiright.addChild(asepriteTextNode);
         let asepriteTextComp = ServiceLocator.graphicManager.create("text", asepriteTextNode, 2);
         asepriteTextComp.text = "as im learning pixel art,\nAseprite was a great \nsoftware to use, try it.".toUpperCase();
         asepriteTextComp.color = "#c2303a";
-        asepriteTextComp.size = 7;
+        asepriteTextComp.size = 6;
 
         let deepnightPicto = ServiceLocator.graphicManager.create("sprite", uiright, 0);
         deepnightPicto.image = sprite;
         deepnightPicto.frame = new Rectangle(new Vector(108,72),new Vector(36, 36));
         deepnightPicto.position = new Vector(170, 85);
 
-        let deepnightTextNode = new Node("ui right", new Vector(210,88));
+        let deepnightTextNode = new Node("deepnightTextNode", new Vector(210,88));
         uiright.addChild(deepnightTextNode);
         let deepnightTextComp = ServiceLocator.graphicManager.create("text", deepnightTextNode, 2);
         deepnightTextComp.text = "i learned to make games\nthanks to Sebastien\n'Deepnight' BENARD,\ngo check out his work!".toUpperCase();
         deepnightTextComp.color = "#c2303a";
-        deepnightTextComp.size = 7;
+        deepnightTextComp.size = 6;
 
         let friendshipPicto = ServiceLocator.graphicManager.create("sprite", uiright, 0);
         friendshipPicto.image = sprite;
         friendshipPicto.frame = new Rectangle(new Vector(108,108),new Vector(36, 36));
         friendshipPicto.position = new Vector(170, 125);
 
-        let friendshipTextNode = new Node("ui right", new Vector(210,128));
+        let friendshipTextNode = new Node("friendshipTextNode", new Vector(210,128));
         uiright.addChild(friendshipTextNode);
         let friendshipTextComp = ServiceLocator.graphicManager.create("text", friendshipTextNode, 2);
-        friendshipTextComp.text = "Special thanks\nto my friend who tested\nthis game when it was\nabsolutely unplayable.".toUpperCase();
+        friendshipTextComp.text = "Special thanks to my friends \nwho tested this game when \nit wa sabsolutely\nunplayable.".toUpperCase();
         friendshipTextComp.color = "#c2303a";
-        friendshipTextComp.size = 7;
+        friendshipTextComp.size = 6;
 
         this.initialized = true;
     }
