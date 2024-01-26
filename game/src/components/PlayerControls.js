@@ -78,7 +78,9 @@ export class PlayerControls extends Component {
                 // this.node.scene.root.addChild(water);
             }
             if (event.code == ServiceLocator.game.commands.b.code) {
-                this.mop.stock = 0;
+                if(this.mop) {
+                    this.mop.stock = 0;
+                }
             }
         }
         if (event.type == "keyup") {

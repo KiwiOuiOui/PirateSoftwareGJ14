@@ -5,6 +5,7 @@ import { ServiceLocator } from '../engine/ServiceLocator.js';
 import { Button } from '../objects/Button';
 import { Rectangle } from '../engine/maths/Rectangle';
 import uiSpriteSrc from '/assets/uisprite.png';
+import uiSplashArt from '/assets/240x160.png';
 import { Node } from '../engine/Node';
 import { Platform } from '../objects/Platform';
 import { GroundFloor } from './GroundFloor';
@@ -57,6 +58,16 @@ export class Home extends Scene {
                 ServiceLocator.game.changeScene(new Mission("mission"));
             };
         }
+
+        let splash = new Image(130,160);
+        splash.src = uiSplashArt;
+
+        //image home
+        let homeSplash = ServiceLocator.graphicManager.create("sprite", uileft, 0);
+        homeSplash.image = splash;
+        homeSplash.frame = new Rectangle(new Vector(0,0),new Vector(240,160));
+        homeSplash.position = new Vector(10, 10);
+
 
         //uiright
         let uiright = new Node("ui right", new Vector(0,0));

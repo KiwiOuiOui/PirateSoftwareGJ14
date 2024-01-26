@@ -40,6 +40,8 @@ export class About extends Scene {
         this.root.addChild(bordersParent);
         let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
         bordersParent.addChild(borderleft);
+        let borderright = new Platform("borderright", new Vector(155, 0), new Vector(10, h), 100) //9)
+        bordersParent.addChild(borderright);
         let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 100) //9)
         bordersParent.addChild(borderup);
         let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), 100) //9)
@@ -48,7 +50,40 @@ export class About extends Scene {
         bordersParent.addChild(borderrightATH);
 
         //uileft
-        let ui = new Node("ui", new Vector(0,0));
+        let uileft = new Node("ui left", new Vector(0,0));
+        this.root.addChild(uileft);
+
+        //about title
+        let aboutTitle = ServiceLocator.graphicManager.create("sprite", uileft, 0);
+        aboutTitle.image = sprite;
+        aboutTitle.frame = new Rectangle(new Vector(240,96),new Vector(48,12));
+        aboutTitle.position = new Vector(70, 20);
+
+        //uiright
+        let uiright = new Node("ui right", new Vector(0,0));
+        this.root.addChild(uiright);
+
+        //credit title
+        let creditTitle = ServiceLocator.graphicManager.create("sprite", uiright, 0);
+        creditTitle.image = sprite;
+        creditTitle.frame = new Rectangle(new Vector(240,108),new Vector(64,12));
+        creditTitle.position = new Vector(200, 20);
+
+        let asepritePicto = ServiceLocator.graphicManager.create("sprite", uiright, 0);
+        asepritePicto.image = sprite;
+        asepritePicto.frame = new Rectangle(new Vector(108,36),new Vector(36, 36));
+        asepritePicto.position = new Vector(175, 45);
+
+        let deepnightPicto = ServiceLocator.graphicManager.create("sprite", uiright, 0);
+        deepnightPicto.image = sprite;
+        deepnightPicto.frame = new Rectangle(new Vector(108,72),new Vector(36, 36));
+        deepnightPicto.position = new Vector(175, 85);
+
+        let friendshipPicto = ServiceLocator.graphicManager.create("sprite", uiright, 0);
+        friendshipPicto.image = sprite;
+        friendshipPicto.frame = new Rectangle(new Vector(108,108),new Vector(36, 36));
+        friendshipPicto.position = new Vector(175, 125);
+
 
         this.initialized = true;
     }

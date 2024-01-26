@@ -73,7 +73,7 @@ export class GroundFloor extends Scene {
 
         commandsNode.spritea = ServiceLocator.graphicManager.create("sprite", commandsNode, 3);
         commandsNode.spritea.image = sprite
-        commandsNode.spritea.frame = new Rectangle(new Vector(156, 48),new Vector(31, 31));
+        commandsNode.spritea.frame = new Rectangle(new Vector(60, 0),new Vector(31, 31));
         commandsNode.spritea.position = new Vector(278, 12);
         commandsNode.spriteb = ServiceLocator.graphicManager.create("sprite", commandsNode, 2);
         commandsNode.spriteb.image = sprite

@@ -8,11 +8,30 @@ import { InputBox } from '../objects/InputBox';
 import { Button } from '../objects/Button';
 import uiSpriteSrc from '/assets/uisprite.png';
 import * as Cookies from '../engine/utils/Cookies';
+import { Node } from '../engine/Node';
 
 export class Settings extends Scene {
     initialize() {
         ServiceLocator.error("init Scene ", this.name);
 
+        let h = ServiceLocator.context.canvas.height/ServiceLocator.scale;
+        let w = ServiceLocator.context.canvas.width/ServiceLocator.scale;
+
+        //border of the game
+        let bordersParent = new Node("borders", new Vector(0,0));
+        this.root.addChild(bordersParent);
+        let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
+        bordersParent.addChild(borderleft);
+        let borderright = new Platform("borderright", new Vector(155, 0), new Vector(10, h), 100) //9)
+        bordersParent.addChild(borderright);
+        let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 100) //9)
+        bordersParent.addChild(borderup);
+        let borderdown = new Platform("borderdown", new Vector(0, 170), new Vector(w, 10), 100) //9)
+        bordersParent.addChild(borderdown);
+        let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), 100) //9)
+        bordersParent.addChild(borderrightATH);
+
+                
         let sprite = new Image(320, 180);
         sprite.src = uiSpriteSrc;
 

@@ -5,6 +5,7 @@ import { ServiceLocator } from '../engine/ServiceLocator.js';
 import { Button } from '../objects/Button';
 import { Rectangle } from '../engine/maths/Rectangle';
 import uiSpriteSrc from '/assets/uisprite.png';
+import uiSplashArt from '/assets/145x160.png';
 import { Node } from '../engine/Node';
 import { Platform } from '../objects/Platform';
 import { GroundFloor } from './GroundFloor';
@@ -25,7 +26,7 @@ export class Mission extends Scene {
         this.root.addChild(bordersParent);
         let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
         bordersParent.addChild(borderleft);
-        let borderright = new Platform("borderright", new Vector(165, 0), new Vector(10, h), 100) //9)
+        let borderright = new Platform("borderright", new Vector(155, 0), new Vector(10, h), 100) //9)
         bordersParent.addChild(borderright);
         let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 100) //9)
         bordersParent.addChild(borderup);
@@ -36,9 +37,17 @@ export class Mission extends Scene {
 
         let sprite = new Image(320, 180);
         sprite.src = uiSpriteSrc;
+        let splash = new Image(130,160);
+        splash.src = uiSplashArt;
+
+        //image mission
+        let missionSplash = ServiceLocator.graphicManager.create("sprite", this.root, 2);
+        missionSplash.image = splash;
+        missionSplash.frame = new Rectangle(new Vector(0,0),new Vector(145,160));
+        missionSplash.position = new Vector(10, 10);
 
         //go home
-        let backBtn = new Button("backBtn", new Vector(175, 10), "")
+        let backBtn = new Button("backBtn", new Vector(165, 10), "")
         this.root.addChild(backBtn);
 
         backBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(24,24));
