@@ -13,16 +13,25 @@ export class Settings extends Scene {
     initialize() {
         ServiceLocator.error("init Scene ", this.name);
 
-        let backBtn = new Button("backBtn", new Vector(10, 20), "< RETURN TO GAME")
+        let sprite = new Image(320, 180);
+        sprite.src = uiSpriteSrc;
+
+        //back to game
+        let backBtn = new Button("backBtn", new Vector(10, 10), "")
         this.root.addChild(backBtn);
 
-        backBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(100, 10));
+        backBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(24,24));
         backBtn.onClick = () => {
             ServiceLocator.clockManager.addTimer(1).action = () => {
                 ServiceLocator.context.canvas.style.cursor = "auto";
                 ServiceLocator.game.changeScene(this._lastScene);
             };
         }
+        
+        let backGraphic = ServiceLocator.graphicManager.create("sprite", backBtn, 2);
+        backGraphic.image = sprite
+        backGraphic.frame = new Rectangle(new Vector(168,12),new Vector(24,24));
+        backGraphic.position = new Vector(0, 0);
 
         let inputUp = new InputBox("upBindBtn", new Vector(68,54 - 15), ServiceLocator.game.commands.up.value)
         this.root.addChild(inputUp);
@@ -106,9 +115,6 @@ export class Settings extends Scene {
         // rectGr.fill = "red";
         // rectGr.stroke = "transparent";
 
-
-        let sprite = new Image(320, 180);
-        sprite.src = uiSpriteSrc;
 
         let DPadGraphic = ServiceLocator.graphicManager.create("sprite", this.root, 2);
         DPadGraphic.image = sprite

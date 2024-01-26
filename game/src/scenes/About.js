@@ -13,16 +13,24 @@ export class About extends Scene {
     initialize() {
         ServiceLocator.error("init Scene ", this.name);
 
-        let backBtn = new Button("backBtn", new Vector(10, 20), "< RETURN TO HOME")
+        let backBtn = new Button("backBtn", new Vector(10, 10), "")
         this.root.addChild(backBtn);
 
-        backBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(100, 10));
+        backBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(24,24));
         backBtn.onClick = () => {
             ServiceLocator.clockManager.addTimer(1).action = () => {
                 ServiceLocator.context.canvas.style.cursor = "auto";
                 ServiceLocator.game.changeScene(this._lastScene);
             };
         }
+        
+        let sprite = new Image(320, 180);
+        sprite.src = uiSpriteSrc;
+
+        let backGraphic = ServiceLocator.graphicManager.create("sprite", backBtn, 2);
+        backGraphic.image = sprite
+        backGraphic.frame = new Rectangle(new Vector(144,12),new Vector(24,24));
+        backGraphic.position = new Vector(0, 0);
 
         let h = ServiceLocator.context.canvas.height/ServiceLocator.scale;
         let w = ServiceLocator.context.canvas.width/ServiceLocator.scale;

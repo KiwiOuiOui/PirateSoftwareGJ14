@@ -25,7 +25,7 @@ export class Mission extends Scene {
         this.root.addChild(bordersParent);
         let borderleft = new Platform("borderleft", new Vector(0, 0), new Vector(10, h), 100) //9)
         bordersParent.addChild(borderleft);
-        let borderright = new Platform("borderright", new Vector(250, 0), new Vector(10, h), 100) //9)
+        let borderright = new Platform("borderright", new Vector(165, 0), new Vector(10, h), 100) //9)
         bordersParent.addChild(borderright);
         let borderup = new Platform("borderup", new Vector(0, 0), new Vector(w, 10), 100) //9)
         bordersParent.addChild(borderup);
@@ -34,19 +34,51 @@ export class Mission extends Scene {
         let borderrightATH = new Platform("borderrightATH", new Vector(310, 0), new Vector(10, h), 100) //9)
         bordersParent.addChild(borderrightATH);
 
-        //uileft
-        let uileft = new Node("ui left", new Vector(0,0));
-        this.root.addChild(uileft);
-
-        let launchGameBtn = new Button("launchGameBtn", new Vector(94, 53), "ACCEPT")
-        uileft.addChild(launchGameBtn);
-
         let sprite = new Image(320, 180);
         sprite.src = uiSpriteSrc;
 
-        // launchGameBtn.sprite = ServiceLocator.graphicManager.create("sprite", launchGameBtn, 2);
-        // launchGameBtn.sprite.image = sprite
-        // launchGameBtn.sprite.frame = new Rectangle(new Vector(240, 72),new Vector(72,24));
+        //go home
+        let backBtn = new Button("backBtn", new Vector(175, 10), "")
+        this.root.addChild(backBtn);
+
+        backBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(24,24));
+        backBtn.onClick = () => {
+            ServiceLocator.clockManager.addTimer(1).action = () => {
+                ServiceLocator.context.canvas.style.cursor = "auto";
+                ServiceLocator.game.changeScene(ServiceLocator.game._homeScene);
+            };
+        }
+        
+
+        let backGraphic = ServiceLocator.graphicManager.create("sprite", backBtn, 2);
+        backGraphic.image = sprite
+        backGraphic.frame = new Rectangle(new Vector(144,12),new Vector(24,24));
+        backGraphic.position = new Vector(0, 0);
+
+        //refresh mission
+        let newMissionBtn = new Button("backBtn", new Vector(286, 10), "")
+        this.root.addChild(newMissionBtn);
+
+        newMissionBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(24,24));
+        newMissionBtn.onClick = () => {
+            ServiceLocator.clockManager.addTimer(1).action = () => {
+                ServiceLocator.context.canvas.style.cursor = "auto";
+                ServiceLocator.game.changeScene(new Mission("mission"));
+            };
+        }
+        
+        let newMissionGraphic = ServiceLocator.graphicManager.create("sprite", newMissionBtn, 2);
+        newMissionGraphic.image = sprite
+        newMissionGraphic.frame = new Rectangle(new Vector(120,12),new Vector(24,24));
+        newMissionGraphic.position = new Vector(0, 0);
+        
+        //launch game
+        let launchGameBtn = new Button("launchGameBtn", new Vector(180, 130), "")
+        this.root.addChild(launchGameBtn);
+
+        launchGameBtn.sprite = ServiceLocator.graphicManager.create("sprite", launchGameBtn, 2);
+        launchGameBtn.sprite.image = sprite
+        launchGameBtn.sprite.frame = new Rectangle(new Vector(240, 72),new Vector(72,24));
 
         launchGameBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(72,24));
         
@@ -57,45 +89,9 @@ export class Mission extends Scene {
             };
         }
 
-        
-        let newMissionBtn = new Button("newMissionBtn", new Vector(94, 103), "NEW MISSION")
-        uileft.addChild(newMissionBtn);
-
-        // newMissionBtn.sprite = ServiceLocator.graphicManager.create("sprite", newMissionBtn, 2);
-        // newMissionBtn.sprite.image = sprite
-        // newMissionBtn.sprite.frame = new Rectangle(new Vector(240, 72),new Vector(72,24));
-
-        newMissionBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(72,24));
-        
-        newMissionBtn.onClick = () => {
-            ServiceLocator.clockManager.addTimer(1).action = () => {
-                ServiceLocator.context.canvas.style.cursor = "auto";
-                ServiceLocator.game.changeScene(new Mission("mission"));
-            };
-        }
-
-        //uiright
-        let uiright = new Node("ui right", new Vector(0,0));
-        this.root.addChild(uiright);
-
-        let aboutBtn = new Button("aboutBtn", new Vector(263, 35), "")
-        uiright.addChild(aboutBtn);
-
-        aboutBtn.sprite = ServiceLocator.graphicManager.create("sprite", aboutBtn, 2);
-        aboutBtn.sprite.image = sprite
-        aboutBtn.sprite.frame = new Rectangle(new Vector(240,96),new Vector(48,12));
-
-        aboutBtn.hitbox = new Rectangle(new Vector(-3,0), new Vector(48,12));
-        
-        aboutBtn.onClick = () => {
-            ServiceLocator.clockManager.addTimer(1).action = () => {
-                ServiceLocator.context.canvas.style.cursor = "auto";
-                ServiceLocator.game.changeScene(ServiceLocator.game._aboutScene);
-            };
-        }
-
+        //settings
         let settingsBtn = new Button("settingsBtn", new Vector(267, 125), "")
-        uiright.addChild(settingsBtn);
+        this.root.addChild(settingsBtn);
 
         settingsBtn.sprite = ServiceLocator.graphicManager.create("sprite", settingsBtn, 2);
         settingsBtn.sprite.image = sprite
