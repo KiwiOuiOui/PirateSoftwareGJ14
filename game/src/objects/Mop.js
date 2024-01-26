@@ -10,7 +10,7 @@ export class Mop extends Node {
         super(name, position);
 
         this.stock = 0;
-        this.stockMax = 16;
+        this.stockMax = 20;
         this._graphic = ServiceLocator.graphicManager.create("circle", this, layer);
         this._collider = ServiceLocator.componentManager.create("CircleCollider", this);
         ServiceLocator.componentManager.addCollider(this._collider);
@@ -27,7 +27,17 @@ export class Mop extends Node {
     set color(value) {
         this._graphic.fill = value;
     }
-
+    calculateSprite() {
+        if(0 == this.stock)
+            this.scene.bucketSprite.frame = new Rectangle(new Vector(60, 0),new Vector(31, 31));
+        else if(this.stockMax/2 >= this.stock)
+            this.scene.bucketSprite.frame = new Rectangle(new Vector(60, 36),new Vector(31, 31));
+        else if(this.stockMax > this.stock)
+            this.scene.bucketSprite.frame = new Rectangle(new Vector(60, 72),new Vector(31, 31));
+        else
+            this.scene.bucketSprite.frame = new Rectangle(new Vector(60, 108),new Vector(31, 31));
+    }
+    
     onCollide = (collider) => {
         this._defaultOnCollide(collider);
 
@@ -37,15 +47,7 @@ export class Mop extends Node {
                 let drop = collider.node;
                 drop.parent.map.remove(drop.x, drop.y);
                 this.stock++;
-                
-                if(0 == this.stock)
-                    this.scene.bucketSprite.frame = new Rectangle(new Vector(60, 0),new Vector(31, 31));
-                else if(this.stockMax/2 >= this.stock)
-                    this.scene.bucketSprite.frame = new Rectangle(new Vector(60, 36),new Vector(31, 31));
-                else if(this.stockMax > this.stock)
-                    this.scene.bucketSprite.frame = new Rectangle(new Vector(60, 72),new Vector(31, 31));
-                else
-                    this.scene.bucketSprite.frame = new Rectangle(new Vector(60, 108),new Vector(31, 31));
+                this.calculateSprite();
             }
         }
     }

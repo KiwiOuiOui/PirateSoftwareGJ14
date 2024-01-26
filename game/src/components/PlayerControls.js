@@ -80,6 +80,7 @@ export class PlayerControls extends Component {
             if (event.code == ServiceLocator.game.commands.a.code) {
                 if(this.mop) {
                     this.mop.stock = 0;
+                    this.mop.calculateSprite();
                 }
             }
         }
