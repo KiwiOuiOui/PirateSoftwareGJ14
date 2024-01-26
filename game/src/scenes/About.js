@@ -27,10 +27,10 @@ export class About extends Scene {
         let sprite = new Image(320, 180);
         sprite.src = uiSpriteSrc;
 
-        let backGraphic = ServiceLocator.graphicManager.create("sprite", backBtn, 2);
-        backGraphic.image = sprite
-        backGraphic.frame = new Rectangle(new Vector(144,12),new Vector(24,24));
-        backGraphic.position = new Vector(0, 0);
+        backBtn.sprite = ServiceLocator.graphicManager.create("sprite", backBtn, 2);
+        backBtn.sprite.image = sprite
+        backBtn.sprite.frame = new Rectangle(new Vector(144,12),new Vector(24,24));
+        backBtn.sprite.position = new Vector(0, 0);
 
         let h = ServiceLocator.context.canvas.height/ServiceLocator.scale;
         let w = ServiceLocator.context.canvas.width/ServiceLocator.scale;

@@ -28,10 +28,10 @@ export class Settings extends Scene {
             };
         }
         
-        let backGraphic = ServiceLocator.graphicManager.create("sprite", backBtn, 2);
-        backGraphic.image = sprite
-        backGraphic.frame = new Rectangle(new Vector(168,12),new Vector(24,24));
-        backGraphic.position = new Vector(0, 0);
+        backBtn.sprite = ServiceLocator.graphicManager.create("sprite", backBtn, 2);
+        backBtn.sprite.image = sprite
+        backBtn.sprite.frame = new Rectangle(new Vector(168,12),new Vector(24,24));
+        backBtn.sprite.position = new Vector(0, 0);
 
         let inputUp = new InputBox("upBindBtn", new Vector(68,54 - 15), ServiceLocator.game.commands.up.value)
         this.root.addChild(inputUp);

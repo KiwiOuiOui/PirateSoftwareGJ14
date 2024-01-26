@@ -62,7 +62,8 @@ export class Home extends Scene {
         let uiright = new Node("ui right", new Vector(0,0));
         this.root.addChild(uiright);
 
-        let aboutBtn = new Button("aboutBtn", new Vector(263, 35), "")
+        //about
+        let aboutBtn = new Button("aboutBtn", new Vector(263, 25), "")
         uiright.addChild(aboutBtn);
 
         aboutBtn.sprite = ServiceLocator.graphicManager.create("sprite", aboutBtn, 2);
@@ -78,6 +79,24 @@ export class Home extends Scene {
             };
         }
 
+        //twitch
+        let twitchBtn = new Button("twitchBtn", new Vector(273, 90), "")
+        uiright.addChild(twitchBtn);
+
+        twitchBtn.sprite = ServiceLocator.graphicManager.create("sprite", twitchBtn, 2);
+        twitchBtn.sprite.image = sprite
+        twitchBtn.sprite.frame = new Rectangle(new Vector(108,144),new Vector(24,24));
+
+        twitchBtn.hitbox = new Rectangle(new Vector(0,0), new Vector(24,24));
+        
+        twitchBtn.onClick = () => {
+            ServiceLocator.clockManager.addTimer(1).action = () => {
+                ServiceLocator.context.canvas.style.cursor = "auto";
+                window.open("https://twitch.tv/KiwiOuiOui","_blank")
+            };
+        }
+    
+        //settings
         let settingsBtn = new Button("settingsBtn", new Vector(267, 125), "")
         uiright.addChild(settingsBtn);
 
@@ -93,7 +112,7 @@ export class Home extends Scene {
                 ServiceLocator.game.changeScene(ServiceLocator.game._settingsScene);
             };
         }
-
+        
         this.initialized = true;
     }
 
