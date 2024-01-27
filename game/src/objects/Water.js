@@ -43,8 +43,8 @@ class WaterDamageMap extends Map {
     }
     postocoord(v) {
         let r = v.multiply(1/dropletSize);
-        r.x = Math.floor(r.x);
-        r.y = Math.floor(r.y);
+        r.x = Math.min(240/dropletSize-1, Math.floor(r.x));
+        r.y = Math.min(160/dropletSize-1, Math.floor(r.y));
         return r;
     }
     coordtopost(v) {
