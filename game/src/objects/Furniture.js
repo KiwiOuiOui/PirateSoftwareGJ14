@@ -60,12 +60,15 @@ export class Furniture extends SolidObject {
 
             if (i < 0)
             {
+                let lastValue = this.value;
                 this.drops.push(drop);
                 console.log(this.name + " hps are " + this.damage + "/" + this.maxHP)
                 console.log(this.name + " value is " + this.value + "USD")
                 if(this.damage > this.maxHP) {
                     console.error("Furniture dies");
                 }
+                ServiceLocator.game.gameValues.damageTaken += (lastValue - this.value)*100;
+                console.log(ServiceLocator.game.gameValues.damageTaken, this.value-lastValue);
             }
     
             if(this.stockMax > this.stock)

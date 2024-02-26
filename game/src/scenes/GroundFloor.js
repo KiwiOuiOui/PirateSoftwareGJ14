@@ -73,7 +73,7 @@ export class GroundFloor extends Scene {
         gameParent.addChild(room2wall2);
         let room2wall3 = new Platform("room2wall3", new Vector(220, 100), new Vector(40, 10), wallLayer) //9)
         gameParent.addChild(room2wall3);
-        let tv = new TV("TV on 1st floor", new Vector(170, 110), 3) //9)
+        let tv = new TV("TV on 1st floor", new Vector(120, 70), 3) //9)
         gameParent.addChild(tv);
 
         //room 3
@@ -115,7 +115,7 @@ export class GroundFloor extends Scene {
         let commandsNode = new Node("commandes hud");
         this.root.addChild(commandsNode);
 
-        this.bucketSprite = commandsNode.spritea = ServiceLocator.graphicManager.create("sprite", commandsNode, 3);
+        /*this.bucketSprite = */commandsNode.spritea = ServiceLocator.graphicManager.create("sprite", commandsNode, 3);
         commandsNode.spritea.image = sprite
         commandsNode.spritea.frame = new Rectangle(new Vector(60, 0),new Vector(31, 31));
         commandsNode.spritea.position = new Vector(278, 12);
@@ -124,6 +124,39 @@ export class GroundFloor extends Scene {
         commandsNode.spriteb.frame = new Rectangle(new Vector(192, 48),new Vector(31, 31));
         commandsNode.spriteb.position = new Vector(262, 27);
 
+
+        let scoreNode = new Node("score", new Vector(267, 85));
+        ui.addChild(scoreNode);
+
+        let insuranceNode = new Node("score", new Vector(10,0));
+        scoreNode.addChild(insuranceNode);
+        let insuranceGraphics = ServiceLocator.graphicManager.create("sprite", insuranceNode, 2);
+        insuranceGraphics.image = sprite
+        insuranceGraphics.frame = new Rectangle(new Vector(192, 84),new Vector(12, 12));
+        insuranceGraphics.position = new Vector(-15, -1);
+        let insuranceInfo = ServiceLocator.graphicManager.create("text", insuranceNode, 2);
+        insuranceInfo.text = ServiceLocator.game.gameValues.insuranceLimit + "$";
+        insuranceInfo.color = "#FEFEFE";
+        insuranceInfo.size = 10;
+
+        ServiceLocator.game.gameValues.damageTaken = 0;
+        let damageNode = new Node("score", new Vector(10,15));
+        scoreNode.addChild(damageNode);
+        let damageGraphics = ServiceLocator.graphicManager.create("sprite", damageNode, 2);
+        damageGraphics.image = sprite
+        damageGraphics.frame = new Rectangle(new Vector(204, 84),new Vector(12, 12));
+        damageGraphics.position = new Vector(-15, -1);
+        let damageInfo = ServiceLocator.graphicManager.create("text", damageNode, 2);
+        damageInfo.text = Math.round(ServiceLocator.game.gameValues.damageTaken) + "$";
+        damageInfo.color = "red";
+        damageInfo.size = 10;
+
+        damageNode.update = () => {
+            damageInfo.text = Math.round(ServiceLocator.game.gameValues.damageTaken) + "$";
+
+            if(ServiceLocator.game.gameValues.damageTaken>ServiceLocator.game.gameValues.insuranceLimit)
+                insuranceInfo.color = "red";
+        }
 
         let settingsBtn = new Button("settingsBtn", new Vector(267, 125), "")
         ui.addChild(settingsBtn);

@@ -10,6 +10,11 @@ export class Game {
 		this._homeScene = null;
 		this._settingsScene = null;
 		this._aboutScene = null;
+		this._gameValues = {
+			timer: null,
+			insuranceLimit : null,
+			damageTaken : null
+		}
 
 		let cookie = Cookies.get("WDSoptions");
 		if(cookie) {
@@ -122,5 +127,11 @@ export class Game {
 	}
 	set scene(s) {
 		this._scene = s;
+	}
+	get gameValues() {
+		return this._gameValues;
+	}
+	set gameValues(v) {
+		this._gameValues = v;
 	}
 }

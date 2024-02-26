@@ -81,11 +81,11 @@ export class Mission extends Scene {
         newMissionGraphic.position = new Vector(0, 0);
         
         //mission infos
-        let insurance = 2500+Math.floor(50*Math.random())*100
-        let insuranceNode = new Node("ui right", new Vector(170,50));
+        ServiceLocator.game.gameValues.insuranceLimit = 2500+Math.floor(50*Math.random())*100
+        let insuranceNode= new Node("ui right", new Vector(170,50));
         this.root.addChild(insuranceNode);
         let insuranceInfo = ServiceLocator.graphicManager.create("text", insuranceNode, 2);
-        insuranceInfo.text = "INSURANCE COVERAGE :\n" + insurance + "$";
+        insuranceInfo.text = "INSURANCE COVERAGE :\n" + ServiceLocator.game.gameValues.insuranceLimit + "$";
         insuranceInfo.color = "red";
         insuranceInfo.size = 10;
 
