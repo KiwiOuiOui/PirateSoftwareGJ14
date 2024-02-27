@@ -3,6 +3,7 @@ import { EventManager } from './events/EventManager.js';
 import { ComponentManager } from './components/ComponentManager.js';
 import { GraphicManager } from './graphics/GraphicManager.js';
 import { FPSCounter } from './time/FPSCounter.js';
+import { GamePad } from './events/GamePad';
 
 class ServiceLocator {
     constructor() {
@@ -22,6 +23,13 @@ class ServiceLocator {
         this._eventManager = null;
         this._componentManager = null;
         this._FPSCounter = null;
+        console.log("search for gamepads", navigator.getGamepads())
+        //TODO : les gamepad sont return lorsqu'il y a eu un input depuis le chargement de la page
+        // on check toutes les X secondes si navigator.getGamepads retourne qqch 
+        // si on connecte une nouvelle manette avec l'eventlistener 
+        // ds les deux cas on ouvre la setting scene et on propose de remplacer la manette actuelle (si pas de manette actuelle go dans les settings pour bind)
+        let defaultGamePad = navigator.getGamepads()[0];
+        this._gamePad = defaultGamePad ? new GamePad(defaultGamePad, defaultGamePad.id) : null;
     }
 
 
@@ -37,6 +45,10 @@ class ServiceLocator {
         this._eventManager.initialize()
         this._componentManager = new ComponentManager();
         this._FPSCounter = new FPSCounter();
+
+        this.error("waiting for gamepad connection ");
+        window.addEventListener("gamepadconnected", this.gamePadConnect);
+        window.addEventListener("gamepaddisconnected", this.gamePadDisconnect);
     }
 
     get context() {
@@ -150,6 +162,22 @@ class ServiceLocator {
     get game() {
         return this._game;
     }
+    set gamePad(gp) {
+        this._gamePad = gp;
+    }
+    get gamePad() {
+        return this._gamePad;
+    }
+
+    gamePadConnect(e) {
+        console.log("gamePadConnect",e);
+        this.gamePad = new GamePad(e.gamepad, e.gamepad.id);
+    }
+    gamePadDisconnect(e) {
+        console.log("gamePadDisconnect",e);
+        this.gamePad = null;
+    }
+
 };
 
 let instance = new ServiceLocator();

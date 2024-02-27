@@ -9,11 +9,18 @@ import { Button } from '../objects/Button';
 import uiSpriteSrc from '/assets/uisprite.png';
 import * as Cookies from '../engine/utils/Cookies';
 import { Node } from '../engine/Node';
+import { PauseKeyComponent } from '../components/PauseKeyComponent';
 
 export class Settings extends Scene {
+    constructor(name)
+    {
+        super(name);
+    }
+
     initialize() {
         ServiceLocator.error("init Scene ", this.name);
 
+        //TODO : faire un switch pour controller 2 etats de binds en fonction de si on choissix de jouer au clavier ou a la manette
         let h = ServiceLocator.context.canvas.height/ServiceLocator.scale;
         let w = ServiceLocator.context.canvas.width/ServiceLocator.scale;
 
@@ -160,5 +167,13 @@ export class Settings extends Scene {
         let date = new Date(Date.now())
         date.setDate(date.getDate() + 2);
         Cookies.set("WDSoptions", JSON.stringify(ServiceLocator.game.commands), date);
+    }
+
+    enable() {
+        super.enable();
+    }
+
+    disable() {
+        super.disable();
     }
 }

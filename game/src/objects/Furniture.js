@@ -67,7 +67,7 @@ export class Furniture extends SolidObject {
                 if(this.damage > this.maxHP) {
                     console.error("Furniture dies");
                 }
-                ServiceLocator.game.gameValues.damageTaken += (lastValue - this.value)*100;
+                ServiceLocator.game.gameValues.damageTaken += (lastValue - this.value)*10;
                 console.log(ServiceLocator.game.gameValues.damageTaken, this.value-lastValue);
             }
     
